@@ -3904,3 +3904,622 @@ textarea:focus-visible {
     }
 
 }
+
+/* =========================================================
+   FINAL GAP LOCK
+   FOLLOW THE SUPPLIED PORTFOLIO SPACING
+   ---------------------------------------------------------
+   Desktop:
+   - Main side spacing: 30px minimum / centered max 1568px
+   - Hero grid gap: 70px
+   - Section vertical spacing: 110px
+   - Standard card grids: 20px
+   - Experience responsibility grid: 18px
+   - QA project grid: 16px
+   - Contact columns: 55px
+   - Detail grid: 20px
+   ---------------------------------------------------------
+   These rules are LAST so duplicate older rules cannot
+   override the final layout.
+========================================================= */
+
+:root {
+    --container: 1568px !important;
+}
+
+/* ---------- SAME PAGE WIDTH ON ALL MAIN PAGES ---------- */
+
+.container,
+.nav-container,
+.project-detail-container,
+.education-detail-container {
+    width: min(var(--container), calc(100% - 60px)) !important;
+    max-width: var(--container) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* ---------- HEADER ---------- */
+
+.header .nav-container {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* ---------- HERO ---------- */
+
+.hero-grid {
+    grid-template-columns: 1.2fr 0.8fr !important;
+    column-gap: 70px !important;
+    row-gap: 70px !important;
+}
+
+.hero-buttons {
+    gap: 15px !important;
+    margin-top: 32px !important;
+}
+
+.quick-tags {
+    gap: 9px !important;
+    margin-top: 30px !important;
+}
+
+/* ---------- ALL NORMAL SECTIONS ---------- */
+
+.section {
+    padding-top: 110px !important;
+    padding-bottom: 110px !important;
+}
+
+.section-heading {
+    margin-bottom: 55px !important;
+}
+
+/* ---------- ABOUT ---------- */
+
+.about-layout {
+    grid-template-columns: 0.8fr 1.2fr !important;
+    column-gap: 30px !important;
+    row-gap: 30px !important;
+}
+
+.about-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    column-gap: 20px !important;
+    row-gap: 20px !important;
+}
+
+/* ---------- SKILLS ---------- */
+
+.skills-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    column-gap: 20px !important;
+    row-gap: 20px !important;
+}
+
+.technology-strip {
+    gap: 10px !important;
+    margin-top: 30px !important;
+}
+
+/* ---------- EXPERIENCE ---------- */
+
+.responsibility-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    column-gap: 18px !important;
+    row-gap: 18px !important;
+}
+
+.other-project-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    column-gap: 16px !important;
+    row-gap: 16px !important;
+}
+
+/* ---------- ACADEMIC PROJECTS ---------- */
+
+.portfolio-project-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    column-gap: 20px !important;
+    row-gap: 20px !important;
+}
+
+/* ---------- EDUCATION ---------- */
+
+.education-item {
+    column-gap: 30px !important;
+    row-gap: 10px !important;
+}
+
+/* ---------- CONTACT ---------- */
+
+.contact {
+    padding-top: 90px !important;
+    padding-bottom: 90px !important;
+}
+
+.contact-box {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    column-gap: 55px !important;
+    row-gap: 55px !important;
+    padding: 55px !important;
+}
+
+/* ---------- CONTACT FORM ---------- */
+
+.contact-form {
+    gap: 18px !important;
+}
+
+.contact-form .form-row {
+    column-gap: 16px !important;
+    row-gap: 16px !important;
+}
+
+/* ---------- PROJECT / EDUCATION DETAIL PAGES ---------- */
+
+.project-detail-page .detail-grid,
+.detail-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    column-gap: 20px !important;
+    row-gap: 20px !important;
+}
+
+/* ---------- EXPERIENCE INTERNAL SPACING ---------- */
+
+.experience-card .main-project {
+    margin: 30px !important;
+}
+
+.experience-card .experience-content,
+.experience-card .other-projects,
+.experience-card .tools-section {
+    padding: 30px !important;
+}
+
+/* =========================================================
+   RESPONSIVE GAP LOCK
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .hero-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 0.7fr) !important;
+        column-gap: 40px !important;
+        row-gap: 40px !important;
+    }
+
+    .skills-grid,
+    .portfolio-project-grid {
+        column-gap: 20px !important;
+        row-gap: 20px !important;
+    }
+
+    .other-project-grid {
+        column-gap: 16px !important;
+        row-gap: 16px !important;
+    }
+}
+
+@media (max-width: 850px) {
+
+    .container,
+    .nav-container,
+    .project-detail-container,
+    .education-detail-container {
+        width: calc(100% - 40px) !important;
+        max-width: none !important;
+    }
+
+    .nav-container {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+
+    .hero {
+        padding-top: 70px !important;
+        padding-bottom: 70px !important;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr !important;
+        column-gap: 0 !important;
+        row-gap: 40px !important;
+    }
+
+    .about-layout,
+    .contact-box {
+        grid-template-columns: 1fr !important;
+        column-gap: 0 !important;
+        row-gap: 35px !important;
+    }
+
+    .skills-grid,
+    .other-project-grid,
+    .portfolio-project-grid,
+    .responsibility-grid,
+    .detail-grid {
+        grid-template-columns: 1fr !important;
+        column-gap: 0 !important;
+        row-gap: 20px !important;
+    }
+
+    .contact-box {
+        padding: 35px !important;
+    }
+
+    .contact {
+        padding-top: 75px !important;
+        padding-bottom: 75px !important;
+    }
+
+    .section {
+        padding-top: 90px !important;
+        padding-bottom: 90px !important;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .container,
+    .project-detail-container,
+    .education-detail-container {
+        width: calc(100% - 30px) !important;
+    }
+
+    .section {
+        padding-top: 75px !important;
+        padding-bottom: 75px !important;
+    }
+
+    .hero {
+        padding-top: 60px !important;
+        padding-bottom: 60px !important;
+    }
+
+    .hero-grid {
+        row-gap: 30px !important;
+    }
+
+    .about-layout,
+    .contact-box {
+        row-gap: 30px !important;
+    }
+
+    .about-cards,
+    .skills-grid,
+    .other-project-grid,
+    .portfolio-project-grid,
+    .responsibility-grid,
+    .detail-grid {
+        row-gap: 20px !important;
+    }
+
+    .contact-box {
+        padding: 25px 20px !important;
+    }
+
+    .contact-form .form-row {
+        row-gap: 18px !important;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .container,
+    .project-detail-container,
+    .education-detail-container {
+        width: calc(100% - 30px) !important;
+    }
+
+    .contact-box {
+        padding: 20px 15px !important;
+    }
+}
+
+/* =========================================================
+   FINAL COMPACT GRID SPACING
+   Use this LAST - it overrides previous spacing rules.
+   Goal: smaller, even vertical + horizontal gaps on ALL pages.
+========================================================= */
+
+:root {
+    --container: 1568px !important;
+    --page-gap: 30px;
+    --grid-gap: 20px;
+    --section-gap: 60px;
+}
+
+/* SAME LEFT / RIGHT SPACE EVERYWHERE */
+.container,
+.nav-container,
+.project-detail-container,
+.education-detail-container {
+    width: min(var(--container), calc(100% - (var(--page-gap) * 2))) !important;
+    max-width: var(--container) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* HEADER */
+.header {
+    height: 82px !important;
+}
+
+.nav {
+    gap: 36px !important;
+}
+
+/* HERO - remove unnecessary empty vertical space */
+.hero {
+    min-height: auto !important;
+    padding: 70px 0 !important;
+}
+
+.hero-grid {
+    min-height: auto !important;
+    column-gap: 60px !important;
+    row-gap: 35px !important;
+}
+
+/* COMMON SECTIONS - smaller top/bottom gap */
+.section {
+    padding: var(--section-gap) 0 !important;
+}
+
+/* HEADING TO CONTENT GAP */
+.section-heading {
+    margin-bottom: 35px !important;
+}
+
+.section-number {
+    margin-bottom: 8px !important;
+}
+
+.section-heading h2 {
+    margin: 0 !important;
+}
+
+.section-intro {
+    margin-top: 12px !important;
+}
+
+/* ABOUT */
+.about-layout {
+    column-gap: 25px !important;
+    row-gap: 25px !important;
+}
+
+.about-cards {
+    column-gap: 20px !important;
+    row-gap: 20px !important;
+}
+
+/* SKILLS */
+.skills-grid {
+    column-gap: 20px !important;
+    row-gap: 20px !important;
+}
+
+.technology-strip {
+    margin-top: 22px !important;
+    gap: 8px !important;
+}
+
+/* EXPERIENCE */
+.experience-header {
+    padding: 30px !important;
+}
+
+.main-project {
+    margin: 22px !important;
+    padding: 25px !important;
+}
+
+.experience-content {
+    padding: 25px !important;
+}
+
+.responsibility-grid {
+    column-gap: 16px !important;
+    row-gap: 16px !important;
+}
+
+.other-projects {
+    padding: 25px !important;
+}
+
+.other-project-grid {
+    column-gap: 16px !important;
+    row-gap: 16px !important;
+}
+
+.tools-section {
+    padding: 25px !important;
+}
+
+/* ACADEMIC PROJECTS */
+.portfolio-project-grid {
+    column-gap: 20px !important;
+    row-gap: 20px !important;
+}
+
+/* EDUCATION - FIX THE LARGE EMPTY GAPS */
+.education-timeline {
+    margin-top: 0 !important;
+}
+
+.education-item {
+    grid-template-columns: 150px minmax(0, 1fr) !important;
+    column-gap: 25px !important;
+    row-gap: 10px !important;
+    padding-bottom: 24px !important;
+}
+
+.education-content {
+    padding: 25px !important;
+}
+
+.education-content h3 {
+    margin: 8px 0 5px !important;
+}
+
+.education-content h4 {
+    margin-bottom: 8px !important;
+}
+
+.education-content p {
+    margin-bottom: 10px !important;
+}
+
+/* CONTACT */
+.contact {
+    padding: 60px 0 !important;
+}
+
+.contact-box {
+    column-gap: 40px !important;
+    row-gap: 35px !important;
+    padding: 40px !important;
+}
+
+.contact-content > p {
+    margin-bottom: 22px !important;
+}
+
+/* DETAIL PAGES */
+.project-detail-page .detail-grid,
+.detail-grid {
+    column-gap: 20px !important;
+    row-gap: 20px !important;
+}
+
+/* FOOTER */
+.footer {
+    padding-top: 45px !important;
+    padding-bottom: 45px !important;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .container,
+    .nav-container,
+    .project-detail-container,
+    .education-detail-container {
+        width: calc(100% - 40px) !important;
+    }
+
+    .hero {
+        padding: 60px 0 !important;
+    }
+
+    .hero-grid {
+        column-gap: 40px !important;
+        row-gap: 35px !important;
+    }
+
+    .education-item {
+        grid-template-columns: 130px minmax(0, 1fr) !important;
+        column-gap: 20px !important;
+    }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .container,
+    .nav-container,
+    .project-detail-container,
+    .education-detail-container {
+        width: calc(100% - 40px) !important;
+        max-width: none !important;
+    }
+
+    .section {
+        padding: 50px 0 !important;
+    }
+
+    .section-heading {
+        margin-bottom: 28px !important;
+    }
+
+    .hero {
+        padding: 50px 0 !important;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr !important;
+        column-gap: 0 !important;
+        row-gap: 30px !important;
+    }
+
+    .about-layout,
+    .contact-box {
+        grid-template-columns: 1fr !important;
+        column-gap: 0 !important;
+        row-gap: 28px !important;
+    }
+
+    .skills-grid,
+    .other-project-grid,
+    .portfolio-project-grid,
+    .responsibility-grid,
+    .detail-grid,
+    .project-detail-page .detail-grid {
+        grid-template-columns: 1fr !important;
+        column-gap: 0 !important;
+        row-gap: 18px !important;
+    }
+
+    .education-item {
+        grid-template-columns: 1fr !important;
+        column-gap: 0 !important;
+        row-gap: 10px !important;
+        padding-bottom: 20px !important;
+    }
+
+    .education-timeline::before {
+        display: none !important;
+    }
+
+    .contact {
+        padding: 50px 0 !important;
+    }
+
+    .contact-box {
+        padding: 28px !important;
+    }
+}
+
+/* SMALL MOBILE */
+@media (max-width: 600px) {
+
+    .container,
+    .project-detail-container,
+    .education-detail-container {
+        width: calc(100% - 30px) !important;
+    }
+
+    .section {
+        padding: 42px 0 !important;
+    }
+
+    .hero {
+        padding: 42px 0 !important;
+    }
+
+    .section-heading {
+        margin-bottom: 24px !important;
+    }
+
+    .contact-box {
+        padding: 22px !important;
+    }
+}
