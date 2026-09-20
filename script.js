@@ -4,11 +4,6 @@
    COMPLETE SCRIPT.JS
 ========================================================= */
 
-
-/* =========================================================
-   DOM READY
-========================================================= */
-
 document.addEventListener("DOMContentLoaded", function () {
 
     /* =====================================================
@@ -16,24 +11,81 @@ document.addEventListener("DOMContentLoaded", function () {
     ===================================================== */
 
     document.body.classList.add("page-ready");
+    document.body.classList.add("page-visible");
 
     document.body.style.opacity = "1";
-
     document.body.style.visibility = "visible";
 
 
     /* =====================================================
-       MOBILE MENU
+       MOBILE NAVIGATION
     ===================================================== */
 
-    const menuToggle =
-        document.getElementById("menuToggle");
+    const menuToggle = document.getElementById("menuToggle");
+    const mainNav = document.getElementById("mainNav");
 
-    const mainNav =
-        document.getElementById("mainNav");
+    const alternativeNav =
+        document.querySelector(".nav-links");
+
+    const activeNav =
+        mainNav || alternativeNav;
 
 
-    if (menuToggle && mainNav) {
+    function closeMobileMenu() {
+
+        if (mainNav) {
+            mainNav.classList.remove("active");
+        }
+
+        if (alternativeNav) {
+            alternativeNav.classList.remove("active");
+        }
+
+        if (menuToggle) {
+
+            menuToggle.textContent = "☰";
+
+            menuToggle.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+            menuToggle.setAttribute(
+                "aria-label",
+                "Open menu"
+            );
+        }
+
+        document.body.classList.remove("menu-open");
+    }
+
+
+    function openMobileMenu() {
+
+        if (activeNav) {
+            activeNav.classList.add("active");
+        }
+
+        if (menuToggle) {
+
+            menuToggle.textContent = "✕";
+
+            menuToggle.setAttribute(
+                "aria-expanded",
+                "true"
+            );
+
+            menuToggle.setAttribute(
+                "aria-label",
+                "Close menu"
+            );
+        }
+
+        document.body.classList.add("menu-open");
+    }
+
+
+    if (menuToggle && activeNav) {
 
         menuToggle.setAttribute(
             "aria-expanded",
@@ -46,278 +98,76 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
-        /* -----------------------------------------------
-           OPEN / CLOSE MENU
-        ------------------------------------------------ */
-
         menuToggle.addEventListener(
             "click",
             function () {
 
-                mainNav.classList.toggle("active");
-
                 const isOpen =
-                    mainNav.classList.contains("active");
-
-
-                menuToggle.textContent =
-                    isOpen
-                        ? "✕"
-                        : "☰";
-
-
-                menuToggle.setAttribute(
-                    "aria-expanded",
-                    isOpen
-                        ? "true"
-                        : "false"
-                );
-
-
-                menuToggle.setAttribute(
-                    "aria-label",
-                    isOpen
-                        ? "Close menu"
-                        : "Open menu"
-                );
-
+                    activeNav.classList.contains("active");
 
                 if (isOpen) {
-
-                    document.body.classList.add(
-                        "menu-open"
-                    );
-
+                    closeMobileMenu();
                 } else {
-
-                    document.body.classList.remove(
-                        "menu-open"
-                    );
-
+                    openMobileMenu();
                 }
 
             }
         );
 
 
-        /* -----------------------------------------------
-           CLOSE MENU AFTER LINK CLICK
-        ------------------------------------------------ */
-
-        const navLinks =
-            mainNav.querySelectorAll("a");
-
-
-        navLinks.forEach(
-            function (link) {
+        activeNav
+            .querySelectorAll("a")
+            .forEach(function (link) {
 
                 link.addEventListener(
                     "click",
                     function () {
-
-                        mainNav.classList.remove(
-                            "active"
-                        );
-
-
-                        menuToggle.textContent =
-                            "☰";
-
-
-                        menuToggle.setAttribute(
-                            "aria-expanded",
-                            "false"
-                        );
-
-
-                        menuToggle.setAttribute(
-                            "aria-label",
-                            "Open menu"
-                        );
-
-
-                        document.body.classList.remove(
-                            "menu-open"
-                        );
-
+                        closeMobileMenu();
                     }
                 );
 
-            }
-        );
-
-
-        /* -----------------------------------------------
-           ESCAPE KEY
-        ------------------------------------------------ */
-
-        document.addEventListener(
-            "keydown",
-            function (event) {
-
-                if (
-                    event.key === "Escape" &&
-                    mainNav.classList.contains("active")
-                ) {
-
-                    mainNav.classList.remove(
-                        "active"
-                    );
-
-
-                    menuToggle.textContent =
-                        "☰";
-
-
-                    menuToggle.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
-
-
-                    menuToggle.setAttribute(
-                        "aria-label",
-                        "Open menu"
-                    );
-
-
-                    document.body.classList.remove(
-                        "menu-open"
-                    );
-
-                }
-
-            }
-        );
-
-
-        /* -----------------------------------------------
-           CLOSE MENU WHEN MOVING TO DESKTOP
-        ------------------------------------------------ */
-
-        window.addEventListener(
-            "resize",
-            function () {
-
-                if (window.innerWidth > 850) {
-
-                    mainNav.classList.remove(
-                        "active"
-                    );
-
-
-                    menuToggle.textContent =
-                        "☰";
-
-
-                    menuToggle.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
-
-
-                    menuToggle.setAttribute(
-                        "aria-label",
-                        "Open menu"
-                    );
-
-
-                    document.body.classList.remove(
-                        "menu-open"
-                    );
-
-                }
-
-            }
-        );
-
+            });
     }
 
 
     /* =====================================================
-       ALTERNATIVE NAVIGATION SUPPORT
+       CLOSE MOBILE MENU WITH ESCAPE
     ===================================================== */
 
-    const alternativeNav =
-        document.querySelector(".nav-links");
+    document.addEventListener(
+        "keydown",
+        function (event) {
 
+            if (event.key === "Escape") {
 
-    if (
-        menuToggle &&
-        alternativeNav &&
-        !mainNav
-    ) {
-
-        menuToggle.addEventListener(
-            "click",
-            function () {
-
-                alternativeNav.classList.toggle(
-                    "active"
-                );
-
-
-                const isOpen =
-                    alternativeNav.classList.contains(
-                        "active"
-                    );
-
-
-                menuToggle.textContent =
-                    isOpen
-                        ? "✕"
-                        : "☰";
-
-
-                menuToggle.setAttribute(
-                    "aria-expanded",
-                    isOpen
-                        ? "true"
-                        : "false"
-                );
-
-
-                menuToggle.setAttribute(
-                    "aria-label",
-                    isOpen
-                        ? "Close menu"
-                        : "Open menu"
-                );
-
-            }
-        );
-
-
-        alternativeNav
-            .querySelectorAll("a")
-            .forEach(
-                function (link) {
-
-                    link.addEventListener(
-                        "click",
-                        function () {
-
-                            alternativeNav.classList.remove(
-                                "active"
-                            );
-
-
-                            menuToggle.textContent =
-                                "☰";
-
-
-                            menuToggle.setAttribute(
-                                "aria-expanded",
-                                "false"
-                            );
-
-                        }
-                    );
-
+                if (
+                    activeNav &&
+                    activeNav.classList.contains("active")
+                ) {
+                    closeMobileMenu();
                 }
-            );
 
-    }
+                closeContactToast();
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       CLOSE MOBILE MENU WHEN RESIZING
+    ===================================================== */
+
+    window.addEventListener(
+        "resize",
+        function () {
+
+            if (window.innerWidth > 850) {
+                closeMobileMenu();
+            }
+
+        }
+    );
 
 
     /* =====================================================
@@ -325,88 +175,91 @@ document.addEventListener("DOMContentLoaded", function () {
     ===================================================== */
 
     const internalLinks =
-        document.querySelectorAll(
-            'a[href^="#"]'
-        );
+        document.querySelectorAll('a[href^="#"]');
 
 
-    internalLinks.forEach(
-        function (link) {
+    internalLinks.forEach(function (link) {
 
-            link.addEventListener(
-                "click",
-                function (event) {
+        link.addEventListener(
+            "click",
+            function (event) {
 
-                    const targetId =
-                        link.getAttribute("href");
-
-
-                    if (
-                        !targetId ||
-                        targetId === "#"
-                    ) {
-
-                        return;
-
-                    }
+                const targetId =
+                    link.getAttribute("href");
 
 
-                    let target = null;
+                if (
+                    !targetId ||
+                    targetId === "#"
+                ) {
+                    return;
+                }
 
 
-                    try {
-
-                        target =
-                            document.querySelector(
-                                targetId
-                            );
-
-                    } catch (error) {
-
-                        return;
-
-                    }
+                let target = null;
 
 
-                    if (!target) {
+                try {
 
-                        return;
+                    target =
+                        document.querySelector(targetId);
 
-                    }
+                } catch (error) {
 
-
-                    event.preventDefault();
-
-
-                    const header =
-                        document.querySelector(
-                            ".header"
-                        );
-
-
-                    const headerHeight =
-                        header
-                            ? header.offsetHeight
-                            : 80;
-
-
-                    const targetPosition =
-                        target.getBoundingClientRect().top +
-                        window.scrollY -
-                        headerHeight -
-                        20;
-
-
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: "smooth"
-                    });
+                    return;
 
                 }
-            );
 
-        }
-    );
+
+                if (!target) {
+                    return;
+                }
+
+
+                event.preventDefault();
+
+
+                const header =
+                    document.querySelector(".header");
+
+
+                const headerHeight =
+                    header
+                        ? header.offsetHeight
+                        : 80;
+
+
+                const targetPosition =
+                    target.getBoundingClientRect().top +
+                    window.scrollY -
+                    headerHeight -
+                    20;
+
+
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: "smooth"
+                });
+
+
+                /*
+                 Update active navigation
+                */
+
+                const targetSectionId =
+                    target.getAttribute("id");
+
+
+                if (targetSectionId) {
+                    setActiveNavigation(
+                        targetSectionId
+                    );
+                }
+
+            }
+        );
+
+    });
 
 
     /* =====================================================
@@ -414,9 +267,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ===================================================== */
 
     const revealElements =
-        document.querySelectorAll(
-            ".reveal"
-        );
+        document.querySelectorAll(".reveal");
 
 
     if (
@@ -428,38 +279,29 @@ document.addEventListener("DOMContentLoaded", function () {
             new IntersectionObserver(
                 function (entries, observer) {
 
-                    entries.forEach(
-                        function (entry) {
+                    entries.forEach(function (entry) {
 
-                            if (
-                                entry.isIntersecting
-                            ) {
+                        if (entry.isIntersecting) {
 
-                                entry.target.classList.add(
-                                    "active"
-                                );
+                            entry.target.classList.add(
+                                "active"
+                            );
 
+                            entry.target.classList.add(
+                                "visible"
+                            );
 
-                                entry.target.classList.add(
-                                    "visible"
-                                );
-
-
-                                observer.unobserve(
-                                    entry.target
-                                );
-
-                            }
-
+                            observer.unobserve(
+                                entry.target
+                            );
                         }
-                    );
+
+                    });
 
                 },
                 {
                     threshold: 0.12,
-
-                    rootMargin:
-                        "0px 0px -50px 0px"
+                    rootMargin: "0px 0px -50px 0px"
                 }
             );
 
@@ -469,16 +311,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 element.style.setProperty(
                     "--reveal-delay",
-                    Math.min(
-                        index * 50,
-                        300
-                    ) + "ms"
+                    Math.min(index * 50, 300) + "ms"
                 );
 
 
-                revealObserver.observe(
-                    element
-                );
+                revealObserver.observe(element);
 
             }
         );
@@ -488,14 +325,8 @@ document.addEventListener("DOMContentLoaded", function () {
         revealElements.forEach(
             function (element) {
 
-                element.classList.add(
-                    "active"
-                );
-
-
-                element.classList.add(
-                    "visible"
-                );
+                element.classList.add("active");
+                element.classList.add("visible");
 
             }
         );
@@ -508,16 +339,12 @@ document.addEventListener("DOMContentLoaded", function () {
     ===================================================== */
 
     const heroContent =
-        document.querySelector(
-            ".hero-content"
-        );
+        document.querySelector(".hero-content");
 
 
     if (heroContent) {
 
-        heroContent.classList.add(
-            "hero-ready"
-        );
+        heroContent.classList.add("hero-ready");
 
 
         const heroElements =
@@ -531,7 +358,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 element.style.setProperty(
                     "--hero-delay",
-                    (150 + index * 120) + "ms"
+                    150 + index * 120 + "ms"
                 );
 
 
@@ -546,13 +373,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       HERO NAME ANIMATION
+       HERO NAME
     ===================================================== */
 
     const heroName =
-        document.querySelector(
-            ".hero h1 span"
-        );
+        document.querySelector(".hero h1 span");
 
 
     if (heroName) {
@@ -565,7 +390,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       HERO BUTTON ANIMATION
+       HERO BUTTONS
     ===================================================== */
 
     const heroButtons =
@@ -579,7 +404,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             button.style.setProperty(
                 "--button-delay",
-                (500 + index * 150) + "ms"
+                500 + index * 150 + "ms"
             );
 
 
@@ -606,7 +431,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             tag.style.setProperty(
                 "--tag-delay",
-                (700 + index * 100) + "ms"
+                700 + index * 100 + "ms"
             );
 
 
@@ -638,20 +463,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       HERO MOUSE MOVEMENT
+       HERO FLOATING SHAPES
        DESKTOP ONLY
     ===================================================== */
 
     const hero =
-        document.querySelector(
-            ".hero"
-        );
+        document.querySelector(".hero");
 
 
     const shapes =
-        document.querySelectorAll(
-            ".floating-shape"
-        );
+        document.querySelectorAll(".floating-shape");
 
 
     if (
@@ -661,11 +482,9 @@ document.addEventListener("DOMContentLoaded", function () {
     ) {
 
         let mouseX = 0;
-
         let mouseY = 0;
 
         let currentX = 0;
-
         let currentY = 0;
 
         let animationFrame = null;
@@ -674,13 +493,11 @@ document.addEventListener("DOMContentLoaded", function () {
         function animateShapes() {
 
             currentX +=
-                (mouseX - currentX) *
-                0.08;
+                (mouseX - currentX) * 0.08;
 
 
             currentY +=
-                (mouseY - currentY) *
-                0.08;
+                (mouseY - currentY) * 0.08;
 
 
             shapes.forEach(
@@ -692,9 +509,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     shape.style.transform =
                         "translate3d(" +
-                        (currentX * movement) +
+                        currentX * movement +
                         "px, " +
-                        (currentY * movement) +
+                        currentY * movement +
                         "px, 0)";
 
                 }
@@ -753,7 +570,6 @@ document.addEventListener("DOMContentLoaded", function () {
             function () {
 
                 mouseX = 0;
-
                 mouseY = 0;
 
             }
@@ -764,9 +580,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "resize",
             function () {
 
-                if (
-                    window.innerWidth <= 850
-                ) {
+                if (window.innerWidth <= 850) {
 
                     if (animationFrame) {
 
@@ -774,19 +588,13 @@ document.addEventListener("DOMContentLoaded", function () {
                             animationFrame
                         );
 
-
-                        animationFrame =
-                            null;
-
+                        animationFrame = null;
                     }
 
 
                     shapes.forEach(
                         function (shape) {
-
-                            shape.style.transform =
-                                "";
-
+                            shape.style.transform = "";
                         }
                     );
 
@@ -820,11 +628,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 let animationFrame = null;
 
                 let targetRotateX = 0;
-
                 let targetRotateY = 0;
 
                 let currentRotateX = 0;
-
                 let currentRotateY = 0;
 
 
@@ -834,16 +640,14 @@ document.addEventListener("DOMContentLoaded", function () {
                         (
                             targetRotateX -
                             currentRotateX
-                        ) *
-                        0.12;
+                        ) * 0.12;
 
 
                     currentRotateY +=
                         (
                             targetRotateY -
                             currentRotateY
-                        ) *
-                        0.12;
+                        ) * 0.12;
 
 
                     card.style.transform =
@@ -875,8 +679,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     } else {
 
-                        animationFrame =
-                            null;
+                        animationFrame = null;
 
                     }
 
@@ -913,16 +716,14 @@ document.addEventListener("DOMContentLoaded", function () {
                             (
                                 (y - centerY) /
                                 centerY
-                            ) *
-                            -2;
+                            ) * -2;
 
 
                         targetRotateY =
                             (
                                 (x - centerX) /
                                 centerX
-                            ) *
-                            2;
+                            ) * 2;
 
 
                         if (!animationFrame) {
@@ -943,7 +744,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     function () {
 
                         targetRotateX = 0;
-
                         targetRotateY = 0;
 
 
@@ -1122,90 +922,152 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
+    function setActiveNavigation(activeId) {
+
+        if (!activeId) {
+            return;
+        }
+
+
+        navigationLinks.forEach(
+            function (link) {
+
+                const href =
+                    link.getAttribute("href");
+
+
+                const linkId =
+                    href && href.includes("#")
+                        ? href.split("#")[1]
+                        : "";
+
+
+                if (linkId === activeId) {
+
+                    link.classList.add(
+                        "active"
+                    );
+
+
+                    link.setAttribute(
+                        "aria-current",
+                        "page"
+                    );
+
+                } else {
+
+                    link.classList.remove(
+                        "active"
+                    );
+
+
+                    link.removeAttribute(
+                        "aria-current"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
     if (
         sections.length > 0 &&
         navigationLinks.length > 0
     ) {
 
-        function updateActiveNavigation() {
+        navigationLinks.forEach(
+            function (link) {
 
-            let currentSection = "";
+                link.addEventListener(
+                    "click",
+                    function () {
 
-
-            const scrollPosition =
-                window.scrollY +
-                180;
-
-
-            sections.forEach(
-                function (section) {
-
-                    const sectionTop =
-                        section.offsetTop;
-
-
-                    const sectionHeight =
-                        section.offsetHeight;
-
-
-                    if (
-                        scrollPosition >=
-                            sectionTop &&
-                        scrollPosition <
-                            sectionTop +
-                            sectionHeight
-                    ) {
-
-                        currentSection =
-                            section.getAttribute(
-                                "id"
+                        const href =
+                            this.getAttribute(
+                                "href"
                             );
-
-                    }
-
-                }
-            );
-
-
-            navigationLinks.forEach(
-                function (link) {
-
-                    const href =
-                        link.getAttribute(
-                            "href"
-                        );
-
-
-                    if (
-                        href &&
-                        href.startsWith("#")
-                    ) {
-
-                        const sectionId =
-                            href.substring(1);
 
 
                         if (
-                            sectionId ===
-                            currentSection
+                            !href ||
+                            !href.includes("#")
                         ) {
+                            return;
+                        }
 
-                            link.classList.add(
-                                "active"
-                            );
 
-                        } else {
+                        const targetId =
+                            href.split("#")[1];
 
-                            link.classList.remove(
-                                "active"
+
+                        if (targetId) {
+
+                            setActiveNavigation(
+                                targetId
                             );
 
                         }
 
                     }
+                );
+
+            }
+        );
+
+
+        function updateActiveNavigation() {
+
+            const header =
+                document.querySelector(
+                    ".header"
+                );
+
+
+            const headerHeight =
+                header
+                    ? header.offsetHeight
+                    : 0;
+
+
+            const scrollPosition =
+                window.scrollY +
+                headerHeight +
+                80;
+
+
+            let currentSection =
+                sections[0];
+
+
+            sections.forEach(
+                function (section) {
+
+                    if (
+                        section.offsetTop <=
+                        scrollPosition
+                    ) {
+
+                        currentSection =
+                            section;
+
+                    }
 
                 }
             );
+
+
+            if (currentSection) {
+
+                setActiveNavigation(
+                    currentSection.getAttribute(
+                        "id"
+                    )
+                );
+
+            }
 
         }
 
@@ -1219,6 +1081,12 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
+        window.addEventListener(
+            "resize",
+            updateActiveNavigation
+        );
+
+
         updateActiveNavigation();
 
     }
@@ -1229,9 +1097,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ===================================================== */
 
     const images =
-        document.querySelectorAll(
-            "img"
-        );
+        document.querySelectorAll("img");
 
 
     images.forEach(
@@ -1297,9 +1163,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         function updateBackToTop() {
 
-            if (
-                window.scrollY > 500
-            ) {
+            if (window.scrollY > 500) {
 
                 backToTop.classList.add(
                     "show"
@@ -1362,7 +1226,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       CONTACT LINK ANIMATION
+       CONTACT LINK HOVER
     ===================================================== */
 
     const contactLinks =
@@ -1403,12 +1267,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* =====================================================
        CONTACT FORM
-       IMPORTANT:
-       - NO PAGE REDIRECT
-       - AJAX SUBMISSION
-       - SUCCESS TOAST
-       - ERROR TOAST
-       - FORM RESET
+       AJAX
+       NO REDIRECT
     ===================================================== */
 
     const contactForm =
@@ -1462,9 +1322,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let contactToastTimer = null;
 
 
-    /* -----------------------------------------------
+    /* =====================================================
        SHOW CONTACT TOAST
-    ------------------------------------------------ */
+    ===================================================== */
 
     function showContactToast(
         title,
@@ -1473,9 +1333,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ) {
 
         if (!contactToast) {
-
             return;
-
         }
 
 
@@ -1485,8 +1343,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 contactToastTimer
             );
 
-            contactToastTimer =
-                null;
+            contactToastTimer = null;
 
         }
 
@@ -1536,9 +1393,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         "show"
                     );
 
-
-                    contactToastTimer =
-                        null;
+                    contactToastTimer = null;
 
                 },
                 5000
@@ -1547,9 +1402,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* -----------------------------------------------
+    /* =====================================================
        CLOSE CONTACT TOAST
-    ------------------------------------------------ */
+    ===================================================== */
 
     function closeContactToast() {
 
@@ -1559,9 +1414,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 contactToastTimer
             );
 
-
-            contactToastTimer =
-                null;
+            contactToastTimer = null;
 
         }
 
@@ -1587,9 +1440,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* -----------------------------------------------
+    /* =====================================================
        CONTACT FORM SUBMIT
-    ------------------------------------------------ */
+    ===================================================== */
 
     if (contactForm) {
 
@@ -1598,25 +1451,19 @@ document.addEventListener("DOMContentLoaded", function () {
             async function (event) {
 
                 /*
-                 IMPORTANT
+                 Stop normal browser submission.
 
-                 Stop the browser from submitting
-                 the form normally.
-
-                 This prevents the FormSubmit
-                 "Thanks!" page.
+                 This prevents FormSubmit from
+                 opening its own Thank You page.
                 */
 
                 event.preventDefault();
-
                 event.stopPropagation();
 
-                event.stopImmediatePropagation();
 
-
-                /* -----------------------------------------
-                   PREVENT DOUBLE SUBMISSION
-                ----------------------------------------- */
+                /*
+                 Prevent double clicking.
+                */
 
                 if (
                     sendMessageBtn &&
@@ -1628,9 +1475,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
 
-                /* -----------------------------------------
-                   BUTTON = SENDING
-                ----------------------------------------- */
+                /*
+                 Change button to Sending...
+                */
 
                 if (sendMessageBtn) {
 
@@ -1656,9 +1503,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 try {
 
-                    /* -------------------------------------
+                    /* ---------------------------------
                        CREATE FORM DATA
-                    ------------------------------------- */
+                    --------------------------------- */
 
                     const formData =
                         new FormData(
@@ -1666,9 +1513,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         );
 
 
-                    /* -------------------------------------
-                       FORM SUBMIT AJAX
-                    ------------------------------------- */
+                    /* ---------------------------------
+                       SEND TO FORMSUBMIT
+                    --------------------------------- */
 
                     const response =
                         await fetch(
@@ -1679,7 +1526,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 body: formData,
 
                                 headers: {
-                                    "Accept":
+                                    Accept:
                                         "application/json"
                                 }
                             }
@@ -1689,16 +1536,16 @@ document.addEventListener("DOMContentLoaded", function () {
                     let result = {};
 
 
-                    /* -------------------------------------
+                    /* ---------------------------------
                        READ RESPONSE
-                    ------------------------------------- */
+                    --------------------------------- */
 
                     try {
 
                         result =
                             await response.json();
 
-                    } catch (jsonError) {
+                    } catch (error) {
 
                         console.log(
                             "FormSubmit returned a non-JSON response."
@@ -1714,22 +1561,22 @@ document.addEventListener("DOMContentLoaded", function () {
                     );
 
 
-                    /* -------------------------------------
+                    /* ---------------------------------
                        SUCCESS
-                    ------------------------------------- */
+                    --------------------------------- */
 
                     if (response.ok) {
 
                         /*
-                         Clear the form
+                         Clear all form fields.
                         */
 
                         contactForm.reset();
 
 
                         /*
-                         Stay on current page
-                         */
+                         Show success message.
+                        */
 
                         showContactToast(
                             "Message Sent!",
@@ -1737,12 +1584,11 @@ document.addEventListener("DOMContentLoaded", function () {
                             true
                         );
 
-
                     } else {
 
-                        /* ---------------------------------
-                           ERROR RESPONSE
-                        --------------------------------- */
+                        /*
+                         Show error message.
+                        */
 
                         showContactToast(
                             "Message Not Sent",
@@ -1753,12 +1599,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     }
 
-
                 } catch (error) {
-
-                    /* -------------------------------------
-                       NETWORK ERROR
-                    ------------------------------------- */
 
                     console.error(
                         "Contact form error:",
@@ -1772,12 +1613,11 @@ document.addEventListener("DOMContentLoaded", function () {
                         false
                     );
 
-
                 } finally {
 
-                    /* -------------------------------------
-                       RESTORE BUTTON
-                    ------------------------------------- */
+                    /*
+                     Restore button.
+                    */
 
                     if (sendMessageBtn) {
 
@@ -1801,8 +1641,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 }
 
-            },
-            true
+            }
         );
 
     }
@@ -1841,7 +1680,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* =====================================================
        EXTERNAL LINKS
-       OPEN EXTERNAL LINKS SAFELY
     ===================================================== */
 
     const externalLinks =
@@ -1886,9 +1724,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
             } catch (error) {
 
-                /*
-                 Ignore invalid URLs.
-                */
+                console.log(
+                    "Invalid external link:",
+                    link.href
+                );
 
             }
 
@@ -1897,74 +1736,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
-       KEYBOARD ACCESSIBILITY
-    ===================================================== */
-
-    document.addEventListener(
-        "keydown",
-        function (event) {
-
-            /* ---------------------------------------------
-               ESCAPE
-            --------------------------------------------- */
-
-            if (
-                event.key === "Escape"
-            ) {
-
-                /* Close mobile menu */
-
-                if (
-                    mainNav &&
-                    mainNav.classList.contains(
-                        "active"
-                    )
-                ) {
-
-                    mainNav.classList.remove(
-                        "active"
-                    );
-
-
-                    if (menuToggle) {
-
-                        menuToggle.textContent =
-                            "☰";
-
-
-                        menuToggle.setAttribute(
-                            "aria-expanded",
-                            "false"
-                        );
-
-
-                        menuToggle.setAttribute(
-                            "aria-label",
-                            "Open menu"
-                        );
-
-                    }
-
-
-                    document.body.classList.remove(
-                        "menu-open"
-                    );
-
-                }
-
-
-                /* Close contact toast */
-
-                closeContactToast();
-
-            }
-
-        }
-    );
-
-
-    /* =====================================================
-       REDUCED MOTION SUPPORT
+       REDUCED MOTION
     ===================================================== */
 
     const prefersReducedMotion =
@@ -2013,6 +1785,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ) {
 
         prefersReducedMotion.addListener(
+            "change",
             updateReducedMotion
         );
 

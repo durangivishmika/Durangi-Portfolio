@@ -10,7 +10,7 @@
 
     <title>Durangi Vishmika | QA </title>
 
-    <link rel="stylesheet" href="style.css?v=20260920-gaps">
+   <link rel="stylesheet" href="style.css?v=20260921-hero3">
 </head>
 
 <body>
@@ -94,7 +94,7 @@
                 <div class="hero-content reveal">
 
                     <p class="hero-label">
-                        QUALITY ASSURANCE 
+                        QUALITY ASSURANCE
                     </p>
 
                     <h1>
@@ -103,7 +103,7 @@
                     </h1>
 
                     <h2>
-                        Quality Assurance 
+                        Quality Assurance
                     </h2>
 
                     <p class="hero-description">
@@ -115,24 +115,24 @@
 
                     <div class="hero-buttons">
 
-    <a href="#projects" class="btn primary-btn">
-        View My Projects
-    </a>
+                        <a href="#projects" class="btn primary-btn">
+                            View My Projects
+                        </a>
 
-    <a
-        href="documents/durangi-vishmika-cv.pdf"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn secondary-btn"
-    >
-        View CV
-    </a>
+                        <a
+                            href="documents/durangi-vishmika-cv.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn secondary-btn"
+                        >
+                            View CV
+                        </a>
 
-    <a href="#contact" class="btn secondary-btn">
-        Contact Me
-    </a>
+                        <a href="#contact" class="btn secondary-btn">
+                            Contact Me
+                        </a>
 
-</div>
+                    </div>
 
                     <div class="quick-tags">
 
@@ -145,7 +145,6 @@
                     </div>
 
                 </div>
-
 
                 <div class="hero-visual reveal">
 
@@ -1511,7 +1510,7 @@
                     </strong>
 
                     <p>
-                        Quality Assurance
+                        Quality Assurance 
                     </p>
                 </div>
 
@@ -1537,108 +1536,8 @@
 
 
 
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const form = document.getElementById("contactForm");
-        const toast = document.getElementById("contactToast");
-        const icon = document.getElementById("contactToastIcon");
-        const title = document.getElementById("contactToastTitle");
-        const message = document.getElementById("contactToastMessage");
-        const closeButton = document.getElementById("contactToastClose");
-        const button = document.getElementById("sendMessageBtn");
-        const buttonText = document.getElementById("sendMessageText");
+    <script src="script.js?v=20260921-final"></script>
 
-        if (!form || !toast) return;
-
-        let toastTimer;
-
-        function showToast(titleText, messageText, success) {
-            clearTimeout(toastTimer);
-
-            title.textContent = titleText;
-            message.textContent = messageText;
-            icon.textContent = success ? "✓" : "!";
-
-            toast.classList.toggle("contact-toast-error", !success);
-            toast.classList.add("show");
-
-            toastTimer = setTimeout(function () {
-                toast.classList.remove("show");
-            }, 5000);
-        }
-
-        function closeToast() {
-            clearTimeout(toastTimer);
-            toast.classList.remove("show");
-        }
-
-        closeButton.addEventListener("click", closeToast);
-
-        form.addEventListener("submit", async function (event) {
-            event.preventDefault();
-
-            if (button) {
-                button.disabled = true;
-            }
-
-            if (buttonText) {
-                buttonText.textContent = "Sending...";
-            }
-
-            try {
-                const response = await fetch(form.action, {
-                    method: "POST",
-                    body: new FormData(form),
-                    headers: {
-                        Accept: "application/json"
-                    }
-                });
-
-                let result = {};
-
-                try {
-                    result = await response.json();
-                } catch (error) {
-                    result = {};
-                }
-
-                if (response.ok && result.success !== false) {
-                    form.reset();
-
-                    showToast(
-                        "Message Sent!",
-                        "Thank you for contacting me.",
-                        true
-                    );
-                } else {
-                    showToast(
-                        "Message Not Sent",
-                        result.message || "Something went wrong. Please try again.",
-                        false
-                    );
-                }
-            } catch (error) {
-                console.error("Contact form error:", error);
-
-                showToast(
-                    "Message Not Sent",
-                    "Please check your connection and try again.",
-                    false
-                );
-            } finally {
-                if (button) {
-                    button.disabled = false;
-                }
-
-                if (buttonText) {
-                    buttonText.textContent = "Send Message";
-                }
-            }
-        });
-    });
-    </script>
-
-    <script src="script.js?v=20260921"></script>
 
 </body>
 
