@@ -10,10 +10,44 @@
 
     <title>Durangi Vishmika | QA Intern</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=20260921-toast">
 </head>
 
 <body>
+
+    <!-- =========================================================
+         CONTACT TOAST
+         IMPORTANT: This is outside the Contact section so
+         position: fixed works relative to the browser viewport.
+    ========================================================== -->
+    <div
+        id="contactToast"
+        class="contact-toast"
+        role="alert"
+        aria-live="polite"
+        aria-atomic="true"
+    >
+        <div
+            id="contactToastIcon"
+            class="contact-toast-icon"
+            aria-hidden="true"
+        >✓</div>
+
+        <div class="contact-toast-content">
+            <strong id="contactToastTitle">Message Sent!</strong>
+            <span id="contactToastMessage">
+                Thank you for contacting me.
+            </span>
+        </div>
+
+        <button
+            type="button"
+            id="contactToastClose"
+            class="contact-toast-close"
+            aria-label="Close notification"
+        >×</button>
+    </div>
+
 
     <!-- =========================
          HEADER
@@ -81,8 +115,6 @@
 
                     <div class="hero-buttons">
 
-                        <div class="hero-buttons">
-
     <a href="#projects" class="btn primary-btn">
         View My Projects
     </a>
@@ -101,9 +133,6 @@
     </a>
 
 </div>
-
-
-                    </div>
 
                     <div class="quick-tags">
 
@@ -1397,137 +1426,70 @@
                 </div>
 
 
-                <!-- CONTACT FORM -->
+ <form
+    id="contactForm"
+    action="https://formsubmit.co/ajax/durangivishmika@gmail.com"
+    method="POST"
+    class="contact-form"
+>
+    <input
+        type="hidden"
+        name="_subject"
+        value="New Portfolio Contact Message"
+    >
 
-                <form
-                    class="contact-form"
-                    action="https://formsubmit.co/durangivishmika@gmail.com"
-                    method="POST"
-                >
+    <input
+        type="hidden"
+        name="_captcha"
+        value="false"
+    >
 
-                    <!-- FormSubmit settings -->
+    <div class="form-row">
 
-                    <input
-                        type="hidden"
-                        name="_subject"
-                        value="New Portfolio Message"
-                    >
+        <input
+            type="text"
+            name="name"
+            placeholder="Enter your name"
+            required
+        >
 
-                    <input
-                        type="hidden"
-                        name="_captcha"
-                        value="false"
-                    >
-
-                    <input
-                        type="hidden"
-                        name="_template"
-                        value="table"
-                    >
-
-
-                    <!-- NAME -->
-
-                    <div class="form-group">
-
-                        <label for="name">
-                            Your Name
-                        </label>
-
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            placeholder="Enter your name"
-                            required
-                        >
-
-                    </div>
-
-
-                    <!-- EMAIL -->
-
-                    <div class="form-group">
-
-                        <label for="email">
-                            Your Email
-                        </label>
-
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="Enter your email"
-                            required
-                        >
-
-                    </div>
-
-
-                    <!-- SUBJECT -->
-
-                    <div class="form-group">
-
-                        <label for="subject">
-                            Subject
-                        </label>
-
-                        <input
-                            type="text"
-                            id="subject"
-                            name="subject"
-                            placeholder="What would you like to talk about?"
-                            required
-                        >
-
-                    </div>
-
-
-                    <!-- MESSAGE -->
-
-                    <div class="form-group">
-
-                        <label for="message">
-                            Message
-                        </label>
-
-                        <textarea
-                            id="message"
-                            name="message"
-                            placeholder="Write your message here..."
-                            required
-                        ></textarea>
-
-                    </div>
-
-
-                    <!-- BUTTON -->
-
-                    <button
-                        type="submit"
-                        class="send-message-btn"
-                    >
-
-                        Send Message
-
-                        <span>
-                            →
-                        </span>
-
-                    </button>
-
-
-                    <p class="form-note">
-                        Your message will be sent directly to my email.
-                    </p>
-
-                </form>
-
-            </div>
-
-        </div>
+        <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+        >
 
     </div>
+
+    <input
+        type="text"
+        name="subject"
+        placeholder="What would you like to talk about?"
+        required
+    >
+
+    <textarea
+        name="message"
+        placeholder="Write your message here..."
+        required
+    ></textarea>
+
+    <button
+        type="submit"
+        class="send-message-btn"
+        id="sendMessageBtn"
+    >
+        <span id="sendMessageText">
+            Send Message
+        </span>
+
+        <span aria-hidden="true">
+            →
+        </span>
+    </button>
+
+</form>
 
 </section>
     </main>
@@ -1571,7 +1533,112 @@
     </button>
 
 
-    <script src="script.js"></script>
+
+
+
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("contactForm");
+        const toast = document.getElementById("contactToast");
+        const icon = document.getElementById("contactToastIcon");
+        const title = document.getElementById("contactToastTitle");
+        const message = document.getElementById("contactToastMessage");
+        const closeButton = document.getElementById("contactToastClose");
+        const button = document.getElementById("sendMessageBtn");
+        const buttonText = document.getElementById("sendMessageText");
+
+        if (!form || !toast) return;
+
+        let toastTimer;
+
+        function showToast(titleText, messageText, success) {
+            clearTimeout(toastTimer);
+
+            title.textContent = titleText;
+            message.textContent = messageText;
+            icon.textContent = success ? "✓" : "!";
+
+            toast.classList.toggle("contact-toast-error", !success);
+            toast.classList.add("show");
+
+            toastTimer = setTimeout(function () {
+                toast.classList.remove("show");
+            }, 5000);
+        }
+
+        function closeToast() {
+            clearTimeout(toastTimer);
+            toast.classList.remove("show");
+        }
+
+        closeButton.addEventListener("click", closeToast);
+
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            if (button) {
+                button.disabled = true;
+            }
+
+            if (buttonText) {
+                buttonText.textContent = "Sending...";
+            }
+
+            try {
+                const response = await fetch(form.action, {
+                    method: "POST",
+                    body: new FormData(form),
+                    headers: {
+                        Accept: "application/json"
+                    }
+                });
+
+                let result = {};
+
+                try {
+                    result = await response.json();
+                } catch (error) {
+                    result = {};
+                }
+
+                if (response.ok && result.success !== false) {
+                    form.reset();
+
+                    showToast(
+                        "Message Sent!",
+                        "Thank you for contacting me.",
+                        true
+                    );
+                } else {
+                    showToast(
+                        "Message Not Sent",
+                        result.message || "Something went wrong. Please try again.",
+                        false
+                    );
+                }
+            } catch (error) {
+                console.error("Contact form error:", error);
+
+                showToast(
+                    "Message Not Sent",
+                    "Please check your connection and try again.",
+                    false
+                );
+            } finally {
+                if (button) {
+                    button.disabled = false;
+                }
+
+                if (buttonText) {
+                    buttonText.textContent = "Send Message";
+                }
+            }
+        });
+    });
+    </script>
+
+    <script src="script.js?v=20260921"></script>
 
 </body>
 

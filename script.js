@@ -2,23 +2,6 @@
    DURANGI VISHMIKA
    QA PORTFOLIO
    COMPLETE SCRIPT.JS
-
-   Includes:
-   - Page load animation
-   - Mobile navigation
-   - Scroll reveal
-   - Staggered animations
-   - Hero animations
-   - Hero mouse movement
-   - Project card tilt
-   - Skill card effects
-   - Active navigation
-   - Smooth scrolling
-   - Image loading animation
-   - Back to top
-   - Current year
-   - Reduced motion support
-   - Keyboard accessibility
 ========================================================= */
 
 
@@ -26,10 +9,16 @@
    DOM READY
 ========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* =====================================================
+       PAGE INITIALIZATION
+    ===================================================== */
 
     document.body.classList.add("page-ready");
+
     document.body.style.opacity = "1";
+
     document.body.style.visibility = "visible";
 
 
@@ -46,10 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (menuToggle && mainNav) {
 
-        /* -----------------------------------------------
-           Initial Accessibility State
-        ------------------------------------------------ */
-
         menuToggle.setAttribute(
             "aria-expanded",
             "false"
@@ -65,122 +50,45 @@ document.addEventListener("DOMContentLoaded", () => {
            OPEN / CLOSE MENU
         ------------------------------------------------ */
 
-        menuToggle.addEventListener("click", () => {
+        menuToggle.addEventListener(
+            "click",
+            function () {
 
-            mainNav.classList.toggle("active");
+                mainNav.classList.toggle("active");
 
-            const isOpen =
-                mainNav.classList.contains("active");
+                const isOpen =
+                    mainNav.classList.contains("active");
 
-
-            menuToggle.setAttribute(
-                "aria-label",
-                isOpen
-                    ? "Close menu"
-                    : "Open menu"
-            );
-
-
-            menuToggle.setAttribute(
-                "aria-expanded",
-                isOpen
-                    ? "true"
-                    : "false"
-            );
-
-
-            menuToggle.textContent =
-                isOpen
-                    ? "✕"
-                    : "☰";
-
-
-            /* Prevent background scrolling */
-
-            if (isOpen) {
-
-                document.body.classList.add(
-                    "menu-open"
-                );
-
-            } else {
-
-                document.body.classList.remove(
-                    "menu-open"
-                );
-
-            }
-
-        });
-
-
-        /* -----------------------------------------------
-           CLOSE MENU AFTER CLICKING LINK
-        ------------------------------------------------ */
-
-        const navLinks =
-            mainNav.querySelectorAll("a");
-
-
-        navLinks.forEach((link) => {
-
-            link.addEventListener("click", () => {
-
-                mainNav.classList.remove(
-                    "active"
-                );
 
                 menuToggle.textContent =
-                    "☰";
+                    isOpen
+                        ? "✕"
+                        : "☰";
 
-                menuToggle.setAttribute(
-                    "aria-label",
-                    "Open menu"
-                );
 
                 menuToggle.setAttribute(
                     "aria-expanded",
-                    "false"
+                    isOpen
+                        ? "true"
+                        : "false"
                 );
 
-                document.body.classList.remove(
-                    "menu-open"
+
+                menuToggle.setAttribute(
+                    "aria-label",
+                    isOpen
+                        ? "Close menu"
+                        : "Open menu"
                 );
 
-            });
 
-        });
+                if (isOpen) {
 
-
-        /* -----------------------------------------------
-           CLOSE MENU WITH ESCAPE KEY
-        ------------------------------------------------ */
-
-        document.addEventListener(
-            "keydown",
-            (event) => {
-
-                if (
-                    event.key === "Escape" &&
-                    mainNav.classList.contains("active")
-                ) {
-
-                    mainNav.classList.remove(
-                        "active"
+                    document.body.classList.add(
+                        "menu-open"
                     );
 
-                    menuToggle.textContent =
-                        "☰";
-
-                    menuToggle.setAttribute(
-                        "aria-label",
-                        "Open menu"
-                    );
-
-                    menuToggle.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
+                } else {
 
                     document.body.classList.remove(
                         "menu-open"
@@ -193,12 +101,103 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         /* -----------------------------------------------
-           CLOSE MENU WHEN RESIZING TO DESKTOP
+           CLOSE MENU AFTER LINK CLICK
+        ------------------------------------------------ */
+
+        const navLinks =
+            mainNav.querySelectorAll("a");
+
+
+        navLinks.forEach(
+            function (link) {
+
+                link.addEventListener(
+                    "click",
+                    function () {
+
+                        mainNav.classList.remove(
+                            "active"
+                        );
+
+
+                        menuToggle.textContent =
+                            "☰";
+
+
+                        menuToggle.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+
+                        menuToggle.setAttribute(
+                            "aria-label",
+                            "Open menu"
+                        );
+
+
+                        document.body.classList.remove(
+                            "menu-open"
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+        /* -----------------------------------------------
+           ESCAPE KEY
+        ------------------------------------------------ */
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key === "Escape" &&
+                    mainNav.classList.contains("active")
+                ) {
+
+                    mainNav.classList.remove(
+                        "active"
+                    );
+
+
+                    menuToggle.textContent =
+                        "☰";
+
+
+                    menuToggle.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+
+                    menuToggle.setAttribute(
+                        "aria-label",
+                        "Open menu"
+                    );
+
+
+                    document.body.classList.remove(
+                        "menu-open"
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* -----------------------------------------------
+           CLOSE MENU WHEN MOVING TO DESKTOP
         ------------------------------------------------ */
 
         window.addEventListener(
             "resize",
-            () => {
+            function () {
 
                 if (window.innerWidth > 850) {
 
@@ -206,18 +205,22 @@ document.addEventListener("DOMContentLoaded", () => {
                         "active"
                     );
 
+
                     menuToggle.textContent =
                         "☰";
+
+
+                    menuToggle.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
 
                     menuToggle.setAttribute(
                         "aria-label",
                         "Open menu"
                     );
 
-                    menuToggle.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
 
                     document.body.classList.remove(
                         "menu-open"
@@ -232,14 +235,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       SUPPORT OTHER NAVIGATION STRUCTURES
-       Some portfolio pages may use .nav-links
+       ALTERNATIVE NAVIGATION SUPPORT
     ===================================================== */
 
     const alternativeNav =
-        document.querySelector(
-            ".nav-links"
-        );
+        document.querySelector(".nav-links");
 
 
     if (
@@ -250,11 +250,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         menuToggle.addEventListener(
             "click",
-            () => {
+            function () {
 
                 alternativeNav.classList.toggle(
                     "active"
                 );
+
 
                 const isOpen =
                     alternativeNav.classList.contains(
@@ -289,28 +290,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
         alternativeNav
             .querySelectorAll("a")
-            .forEach((link) => {
+            .forEach(
+                function (link) {
 
-                link.addEventListener(
-                    "click",
-                    () => {
+                    link.addEventListener(
+                        "click",
+                        function () {
 
-                        alternativeNav.classList.remove(
-                            "active"
-                        );
+                            alternativeNav.classList.remove(
+                                "active"
+                            );
 
-                        menuToggle.textContent =
-                            "☰";
 
-                        menuToggle.setAttribute(
-                            "aria-expanded",
-                            "false"
-                        );
+                            menuToggle.textContent =
+                                "☰";
 
-                    }
-                );
 
-            });
+                            menuToggle.setAttribute(
+                                "aria-expanded",
+                                "false"
+                            );
+
+                        }
+                    );
+
+                }
+            );
 
     }
 
@@ -325,67 +330,83 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-    internalLinks.forEach((link) => {
+    internalLinks.forEach(
+        function (link) {
 
-        link.addEventListener(
-            "click",
-            (event) => {
+            link.addEventListener(
+                "click",
+                function (event) {
 
-                const targetId =
-                    link.getAttribute("href");
+                    const targetId =
+                        link.getAttribute("href");
 
 
-                if (
-                    !targetId ||
-                    targetId === "#"
-                ) {
-                    return;
+                    if (
+                        !targetId ||
+                        targetId === "#"
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    let target = null;
+
+
+                    try {
+
+                        target =
+                            document.querySelector(
+                                targetId
+                            );
+
+                    } catch (error) {
+
+                        return;
+
+                    }
+
+
+                    if (!target) {
+
+                        return;
+
+                    }
+
+
+                    event.preventDefault();
+
+
+                    const header =
+                        document.querySelector(
+                            ".header"
+                        );
+
+
+                    const headerHeight =
+                        header
+                            ? header.offsetHeight
+                            : 80;
+
+
+                    const targetPosition =
+                        target.getBoundingClientRect().top +
+                        window.scrollY -
+                        headerHeight -
+                        20;
+
+
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: "smooth"
+                    });
+
                 }
+            );
 
-
-                const target =
-                    document.querySelector(
-                        targetId
-                    );
-
-
-                if (!target) {
-                    return;
-                }
-
-
-                event.preventDefault();
-
-
-                const header =
-                    document.querySelector(
-                        ".header"
-                    );
-
-
-                const headerHeight =
-                    header
-                        ? header.offsetHeight
-                        : 80;
-
-
-                const targetPosition =
-                    target.getBoundingClientRect()
-                        .top +
-                    window.scrollY -
-                    headerHeight -
-                    20;
-
-
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: "smooth"
-                });
-
-            }
-        );
-
-    });
+        }
+    );
 
 
     /* =====================================================
@@ -400,15 +421,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (
         "IntersectionObserver" in window &&
-        revealElements.length
+        revealElements.length > 0
     ) {
 
         const revealObserver =
             new IntersectionObserver(
-                (entries, observer) => {
+                function (entries, observer) {
 
                     entries.forEach(
-                        (entry) => {
+                        function (entry) {
 
                             if (
                                 entry.isIntersecting
@@ -417,6 +438,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 entry.target.classList.add(
                                     "active"
                                 );
+
 
                                 entry.target.classList.add(
                                     "visible"
@@ -443,16 +465,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         revealElements.forEach(
-            (element, index) => {
-
-                /* Stagger animation */
+            function (element, index) {
 
                 element.style.setProperty(
                     "--reveal-delay",
-                    `${Math.min(
+                    Math.min(
                         index * 50,
                         300
-                    )}ms`
+                    ) + "ms"
                 );
 
 
@@ -463,17 +483,15 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         );
 
-
     } else {
 
-        /* Browser fallback */
-
         revealElements.forEach(
-            (element) => {
+            function (element) {
 
                 element.classList.add(
                     "active"
                 );
+
 
                 element.classList.add(
                     "visible"
@@ -486,8 +504,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       HERO ELEMENTS
-       Professional Entrance Animation
+       HERO ANIMATION
     ===================================================== */
 
     const heroContent =
@@ -510,12 +527,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         heroElements.forEach(
-            (element, index) => {
+            function (element, index) {
 
                 element.style.setProperty(
                     "--hero-delay",
-                    `${150 + index * 120}ms`
+                    (150 + index * 120) + "ms"
                 );
+
 
                 element.classList.add(
                     "hero-animate"
@@ -528,7 +546,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       HERO NAME EFFECT
+       HERO NAME ANIMATION
     ===================================================== */
 
     const heroName =
@@ -547,7 +565,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       HERO BUTTON EFFECT
+       HERO BUTTON ANIMATION
     ===================================================== */
 
     const heroButtons =
@@ -557,12 +575,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     heroButtons.forEach(
-        (button, index) => {
+        function (button, index) {
 
             button.style.setProperty(
                 "--button-delay",
-                `${500 + index * 150}ms`
+                (500 + index * 150) + "ms"
             );
+
 
             button.classList.add(
                 "button-animate"
@@ -583,12 +602,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     quickTags.forEach(
-        (tag, index) => {
+        function (tag, index) {
 
             tag.style.setProperty(
                 "--tag-delay",
-                `${700 + index * 100}ms`
+                (700 + index * 100) + "ms"
             );
+
 
             tag.classList.add(
                 "tag-animate"
@@ -599,7 +619,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       HERO PHOTO ANIMATION
+       HERO IMAGE
     ===================================================== */
 
     const heroImage =
@@ -619,7 +639,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* =====================================================
        HERO MOUSE MOVEMENT
-       Desktop Only
+       DESKTOP ONLY
     ===================================================== */
 
     const hero =
@@ -636,7 +656,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (
         hero &&
-        shapes.length &&
+        shapes.length > 0 &&
         window.innerWidth > 850
     ) {
 
@@ -651,48 +671,47 @@ document.addEventListener("DOMContentLoaded", () => {
         let animationFrame = null;
 
 
-        const animateShapes =
-            () => {
+        function animateShapes() {
 
-                currentX +=
-                    (mouseX - currentX) *
-                    0.08;
-
-
-                currentY +=
-                    (mouseY - currentY) *
-                    0.08;
+            currentX +=
+                (mouseX - currentX) *
+                0.08;
 
 
-                shapes.forEach(
-                    (shape, index) => {
-
-                        const movement =
-                            (index + 1) * 8;
+            currentY +=
+                (mouseY - currentY) *
+                0.08;
 
 
-                        shape.style.transform =
-                            `translate3d(
-                                ${currentX * movement}px,
-                                ${currentY * movement}px,
-                                0
-                            )`;
+            shapes.forEach(
+                function (shape, index) {
 
-                    }
+                    const movement =
+                        (index + 1) * 8;
+
+
+                    shape.style.transform =
+                        "translate3d(" +
+                        (currentX * movement) +
+                        "px, " +
+                        (currentY * movement) +
+                        "px, 0)";
+
+                }
+            );
+
+
+            animationFrame =
+                requestAnimationFrame(
+                    animateShapes
                 );
 
-
-                animationFrame =
-                    requestAnimationFrame(
-                        animateShapes
-                    );
-
-            };
+        }
 
 
         hero.addEventListener(
             "mousemove",
-            (event) => {
+            function (event) {
 
                 const rect =
                     hero.getBoundingClientRect();
@@ -731,7 +750,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         hero.addEventListener(
             "mouseleave",
-            () => {
+            function () {
 
                 mouseX = 0;
 
@@ -743,19 +762,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
         window.addEventListener(
             "resize",
-            () => {
+            function () {
 
                 if (
                     window.innerWidth <= 850
                 ) {
 
-                    if (
-                        animationFrame
-                    ) {
+                    if (animationFrame) {
 
                         cancelAnimationFrame(
                             animationFrame
                         );
+
 
                         animationFrame =
                             null;
@@ -764,7 +782,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                     shapes.forEach(
-                        (shape) => {
+                        function (shape) {
 
                             shape.style.transform =
                                 "";
@@ -781,8 +799,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       PROFESSIONAL PROJECT CARD TILT
-       Desktop Only
+       PROJECT CARD TILT
+       DESKTOP ONLY
     ===================================================== */
 
     const projectCards =
@@ -792,16 +810,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     if (
-        projectCards.length &&
+        projectCards.length > 0 &&
         window.innerWidth > 850
     ) {
 
         projectCards.forEach(
-            (card) => {
+            function (card) {
 
-                let animationFrame =
-                    null;
-
+                let animationFrame = null;
 
                 let targetRotateX = 0;
 
@@ -812,61 +828,64 @@ document.addEventListener("DOMContentLoaded", () => {
                 let currentRotateY = 0;
 
 
-                const animateCard =
-                    () => {
+                function animateCard() {
 
-                        currentRotateX +=
-                            (
-                                targetRotateX -
-                                currentRotateX
-                            ) *
-                            0.12;
-
-
-                        currentRotateY +=
-                            (
-                                targetRotateY -
-                                currentRotateY
-                            ) *
-                            0.12;
+                    currentRotateX +=
+                        (
+                            targetRotateX -
+                            currentRotateX
+                        ) *
+                        0.12;
 
 
-                        card.style.transform =
-                            `perspective(900px)
-                             rotateX(${currentRotateX}deg)
-                             rotateY(${currentRotateY}deg)
-                             translateY(-6px)`;
+                    currentRotateY +=
+                        (
+                            targetRotateY -
+                            currentRotateY
+                        ) *
+                        0.12;
 
 
-                        if (
-                            Math.abs(
-                                currentRotateX -
-                                targetRotateX
-                            ) > 0.01 ||
-                            Math.abs(
-                                currentRotateY -
-                                targetRotateY
-                            ) > 0.01
-                        ) {
+                    card.style.transform =
+                        "perspective(900px) " +
+                        "rotateX(" +
+                        currentRotateX +
+                        "deg) " +
+                        "rotateY(" +
+                        currentRotateY +
+                        "deg) " +
+                        "translateY(-6px)";
 
-                            animationFrame =
-                                requestAnimationFrame(
-                                    animateCard
-                                );
 
-                        } else {
+                    if (
+                        Math.abs(
+                            currentRotateX -
+                            targetRotateX
+                        ) > 0.01 ||
+                        Math.abs(
+                            currentRotateY -
+                            targetRotateY
+                        ) > 0.01
+                    ) {
 
-                            animationFrame =
-                                null;
+                        animationFrame =
+                            requestAnimationFrame(
+                                animateCard
+                            );
 
-                        }
+                    } else {
 
-                    };
+                        animationFrame =
+                            null;
+
+                    }
+
+                }
 
 
                 card.addEventListener(
                     "mousemove",
-                    (event) => {
+                    function (event) {
 
                         const rect =
                             card.getBoundingClientRect();
@@ -906,9 +925,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             2;
 
 
-                        if (
-                            !animationFrame
-                        ) {
+                        if (!animationFrame) {
 
                             animationFrame =
                                 requestAnimationFrame(
@@ -923,16 +940,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 card.addEventListener(
                     "mouseleave",
-                    () => {
+                    function () {
 
                         targetRotateX = 0;
 
                         targetRotateY = 0;
 
 
-                        if (
-                            !animationFrame
-                        ) {
+                        if (!animationFrame) {
 
                             animationFrame =
                                 requestAnimationFrame(
@@ -952,7 +967,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* =====================================================
        OTHER PROJECT CARDS
-       Subtle Hover Motion
     ===================================================== */
 
     const otherProjectCards =
@@ -962,11 +976,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     otherProjectCards.forEach(
-        (card) => {
+        function (card) {
 
             card.addEventListener(
                 "mouseenter",
-                () => {
+                function () {
 
                     card.classList.add(
                         "card-hover"
@@ -978,7 +992,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             card.addEventListener(
                 "mouseleave",
-                () => {
+                function () {
 
                     card.classList.remove(
                         "card-hover"
@@ -993,7 +1007,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* =====================================================
        SKILL CARDS
-       Subtle Interaction
     ===================================================== */
 
     const skillCards =
@@ -1003,11 +1016,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     skillCards.forEach(
-        (card) => {
+        function (card) {
 
             card.addEventListener(
                 "mouseenter",
-                () => {
+                function () {
 
                     card.classList.add(
                         "skill-hover"
@@ -1019,7 +1032,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             card.addEventListener(
                 "mouseleave",
-                () => {
+                function () {
 
                     card.classList.remove(
                         "skill-hover"
@@ -1043,11 +1056,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     educationCards.forEach(
-        (card) => {
+        function (card) {
 
             card.addEventListener(
                 "mouseenter",
-                () => {
+                function () {
 
                     card.classList.add(
                         "education-hover"
@@ -1059,7 +1072,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             card.addEventListener(
                 "mouseleave",
-                () => {
+                function () {
 
                     card.classList.remove(
                         "education-hover"
@@ -1083,7 +1096,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     detailCards.forEach(
-        (card) => {
+        function (card) {
 
             card.classList.add(
                 "detail-ready"
@@ -1094,8 +1107,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       NAVIGATION ACTIVE LINK
-       Home Page
+       ACTIVE NAVIGATION
     ===================================================== */
 
     const sections =
@@ -1111,93 +1123,91 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     if (
-        sections.length &&
-        navigationLinks.length
+        sections.length > 0 &&
+        navigationLinks.length > 0
     ) {
 
-        const updateActiveNavigation =
-            () => {
+        function updateActiveNavigation() {
 
-                let currentSection =
-                    "";
+            let currentSection = "";
 
 
-                const scrollPosition =
-                    window.scrollY +
-                    180;
+            const scrollPosition =
+                window.scrollY +
+                180;
 
 
-                sections.forEach(
-                    (section) => {
+            sections.forEach(
+                function (section) {
 
-                        const sectionTop =
-                            section.offsetTop;
-
-
-                        const sectionHeight =
-                            section.offsetHeight;
+                    const sectionTop =
+                        section.offsetTop;
 
 
-                        if (
-                            scrollPosition >=
-                                sectionTop &&
-                            scrollPosition <
-                                sectionTop +
-                                sectionHeight
-                        ) {
-
-                            currentSection =
-                                section.getAttribute(
-                                    "id"
-                                );
-
-                        }
-
-                    }
-                );
+                    const sectionHeight =
+                        section.offsetHeight;
 
 
-                navigationLinks.forEach(
-                    (link) => {
+                    if (
+                        scrollPosition >=
+                            sectionTop &&
+                        scrollPosition <
+                            sectionTop +
+                            sectionHeight
+                    ) {
 
-                        const href =
-                            link.getAttribute(
-                                "href"
+                        currentSection =
+                            section.getAttribute(
+                                "id"
                             );
 
+                    }
+
+                }
+            );
+
+
+            navigationLinks.forEach(
+                function (link) {
+
+                    const href =
+                        link.getAttribute(
+                            "href"
+                        );
+
+
+                    if (
+                        href &&
+                        href.startsWith("#")
+                    ) {
+
+                        const sectionId =
+                            href.substring(1);
+
 
                         if (
-                            href &&
-                            href.startsWith("#")
+                            sectionId ===
+                            currentSection
                         ) {
 
-                            const sectionId =
-                                href.substring(1);
+                            link.classList.add(
+                                "active"
+                            );
 
+                        } else {
 
-                            if (
-                                sectionId ===
-                                currentSection
-                            ) {
-
-                                link.classList.add(
-                                    "active"
-                                );
-
-                            } else {
-
-                                link.classList.remove(
-                                    "active"
-                                );
-
-                            }
+                            link.classList.remove(
+                                "active"
+                            );
 
                         }
 
                     }
-                );
 
-            };
+                }
+            );
+
+        }
 
 
         window.addEventListener(
@@ -1215,7 +1225,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       IMAGE LOADING EFFECT
+       IMAGE LOADING
     ===================================================== */
 
     const images =
@@ -1225,7 +1235,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     images.forEach(
-        (image) => {
+        function (image) {
 
             if (
                 image.complete &&
@@ -1240,7 +1250,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 image.addEventListener(
                     "load",
-                    () => {
+                    function () {
 
                         image.classList.add(
                             "image-loaded"
@@ -1255,7 +1265,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 image.addEventListener(
                     "error",
-                    () => {
+                    function () {
 
                         image.classList.add(
                             "image-error"
@@ -1285,26 +1295,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (backToTop) {
 
-        const updateBackToTop =
-            () => {
+        function updateBackToTop() {
 
-                if (
-                    window.scrollY > 500
-                ) {
+            if (
+                window.scrollY > 500
+            ) {
 
-                    backToTop.classList.add(
-                        "show"
-                    );
+                backToTop.classList.add(
+                    "show"
+                );
 
-                } else {
+            } else {
 
-                    backToTop.classList.remove(
-                        "show"
-                    );
+                backToTop.classList.remove(
+                    "show"
+                );
 
-                }
+            }
 
-            };
+        }
 
 
         window.addEventListener(
@@ -1318,7 +1327,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         backToTop.addEventListener(
             "click",
-            () => {
+            function () {
 
                 window.scrollTo({
                     top: 0,
@@ -1363,11 +1372,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     contactLinks.forEach(
-        (link) => {
+        function (link) {
 
             link.addEventListener(
                 "mouseenter",
-                () => {
+                function () {
 
                     link.classList.add(
                         "contact-hover"
@@ -1379,7 +1388,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             link.addEventListener(
                 "mouseleave",
-                () => {
+                function () {
 
                     link.classList.remove(
                         "contact-hover"
@@ -1393,8 +1402,414 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
+       CONTACT FORM
+       IMPORTANT:
+       - NO PAGE REDIRECT
+       - AJAX SUBMISSION
+       - SUCCESS TOAST
+       - ERROR TOAST
+       - FORM RESET
+    ===================================================== */
+
+    const contactForm =
+        document.getElementById(
+            "contactForm"
+        );
+
+
+    const contactToast =
+        document.getElementById(
+            "contactToast"
+        );
+
+
+    const contactToastIcon =
+        document.getElementById(
+            "contactToastIcon"
+        );
+
+
+    const contactToastTitle =
+        document.getElementById(
+            "contactToastTitle"
+        );
+
+
+    const contactToastMessage =
+        document.getElementById(
+            "contactToastMessage"
+        );
+
+
+    const contactToastClose =
+        document.getElementById(
+            "contactToastClose"
+        );
+
+
+    const sendMessageBtn =
+        document.getElementById(
+            "sendMessageBtn"
+        );
+
+
+    const sendMessageText =
+        document.getElementById(
+            "sendMessageText"
+        );
+
+
+    let contactToastTimer = null;
+
+
+    /* -----------------------------------------------
+       SHOW CONTACT TOAST
+    ------------------------------------------------ */
+
+    function showContactToast(
+        title,
+        message,
+        success
+    ) {
+
+        if (!contactToast) {
+
+            return;
+
+        }
+
+
+        if (contactToastTimer) {
+
+            clearTimeout(
+                contactToastTimer
+            );
+
+            contactToastTimer =
+                null;
+
+        }
+
+
+        if (contactToastTitle) {
+
+            contactToastTitle.textContent =
+                title;
+
+        }
+
+
+        if (contactToastMessage) {
+
+            contactToastMessage.textContent =
+                message;
+
+        }
+
+
+        if (contactToastIcon) {
+
+            contactToastIcon.textContent =
+                success
+                    ? "✓"
+                    : "!";
+
+        }
+
+
+        contactToast.classList.toggle(
+            "contact-toast-error",
+            !success
+        );
+
+
+        contactToast.classList.add(
+            "show"
+        );
+
+
+        contactToastTimer =
+            setTimeout(
+                function () {
+
+                    contactToast.classList.remove(
+                        "show"
+                    );
+
+
+                    contactToastTimer =
+                        null;
+
+                },
+                5000
+            );
+
+    }
+
+
+    /* -----------------------------------------------
+       CLOSE CONTACT TOAST
+    ------------------------------------------------ */
+
+    function closeContactToast() {
+
+        if (contactToastTimer) {
+
+            clearTimeout(
+                contactToastTimer
+            );
+
+
+            contactToastTimer =
+                null;
+
+        }
+
+
+        if (contactToast) {
+
+            contactToast.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+
+
+    if (contactToastClose) {
+
+        contactToastClose.addEventListener(
+            "click",
+            closeContactToast
+        );
+
+    }
+
+
+    /* -----------------------------------------------
+       CONTACT FORM SUBMIT
+    ------------------------------------------------ */
+
+    if (contactForm) {
+
+        contactForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                /*
+                 IMPORTANT
+
+                 Stop the browser from submitting
+                 the form normally.
+
+                 This prevents the FormSubmit
+                 "Thanks!" page.
+                */
+
+                event.preventDefault();
+
+                event.stopPropagation();
+
+                event.stopImmediatePropagation();
+
+
+                /* -----------------------------------------
+                   PREVENT DOUBLE SUBMISSION
+                ----------------------------------------- */
+
+                if (
+                    sendMessageBtn &&
+                    sendMessageBtn.disabled
+                ) {
+
+                    return;
+
+                }
+
+
+                /* -----------------------------------------
+                   BUTTON = SENDING
+                ----------------------------------------- */
+
+                if (sendMessageBtn) {
+
+                    sendMessageBtn.disabled =
+                        true;
+
+
+                    sendMessageBtn.setAttribute(
+                        "aria-busy",
+                        "true"
+                    );
+
+                }
+
+
+                if (sendMessageText) {
+
+                    sendMessageText.textContent =
+                        "Sending...";
+
+                }
+
+
+                try {
+
+                    /* -------------------------------------
+                       CREATE FORM DATA
+                    ------------------------------------- */
+
+                    const formData =
+                        new FormData(
+                            contactForm
+                        );
+
+
+                    /* -------------------------------------
+                       FORM SUBMIT AJAX
+                    ------------------------------------- */
+
+                    const response =
+                        await fetch(
+                            "https://formsubmit.co/ajax/durangivishmika@gmail.com",
+                            {
+                                method: "POST",
+
+                                body: formData,
+
+                                headers: {
+                                    "Accept":
+                                        "application/json"
+                                }
+                            }
+                        );
+
+
+                    let result = {};
+
+
+                    /* -------------------------------------
+                       READ RESPONSE
+                    ------------------------------------- */
+
+                    try {
+
+                        result =
+                            await response.json();
+
+                    } catch (jsonError) {
+
+                        console.log(
+                            "FormSubmit returned a non-JSON response."
+                        );
+
+                    }
+
+
+                    console.log(
+                        "Contact form response:",
+                        response.status,
+                        result
+                    );
+
+
+                    /* -------------------------------------
+                       SUCCESS
+                    ------------------------------------- */
+
+                    if (response.ok) {
+
+                        /*
+                         Clear the form
+                        */
+
+                        contactForm.reset();
+
+
+                        /*
+                         Stay on current page
+                         */
+
+                        showContactToast(
+                            "Message Sent!",
+                            "Thank you for contacting me.",
+                            true
+                        );
+
+
+                    } else {
+
+                        /* ---------------------------------
+                           ERROR RESPONSE
+                        --------------------------------- */
+
+                        showContactToast(
+                            "Message Not Sent",
+                            result.message ||
+                                "Something went wrong. Please try again.",
+                            false
+                        );
+
+                    }
+
+
+                } catch (error) {
+
+                    /* -------------------------------------
+                       NETWORK ERROR
+                    ------------------------------------- */
+
+                    console.error(
+                        "Contact form error:",
+                        error
+                    );
+
+
+                    showContactToast(
+                        "Message Not Sent",
+                        "Please check your connection and try again.",
+                        false
+                    );
+
+
+                } finally {
+
+                    /* -------------------------------------
+                       RESTORE BUTTON
+                    ------------------------------------- */
+
+                    if (sendMessageBtn) {
+
+                        sendMessageBtn.disabled =
+                            false;
+
+
+                        sendMessageBtn.removeAttribute(
+                            "aria-busy"
+                        );
+
+                    }
+
+
+                    if (sendMessageText) {
+
+                        sendMessageText.textContent =
+                            "Send Message";
+
+                    }
+
+                }
+
+            },
+            true
+        );
+
+    }
+
+
+    /* =====================================================
        PDF VIEWER
-       Improve loading experience
     ===================================================== */
 
     const pdfViewers =
@@ -1404,11 +1819,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     pdfViewers.forEach(
-        (iframe) => {
+        function (iframe) {
 
             iframe.addEventListener(
                 "load",
-                () => {
+                function () {
 
                     iframe.classList.add(
                         "pdf-loaded"
@@ -1426,7 +1841,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* =====================================================
        EXTERNAL LINKS
-       Open safely in new tab
+       OPEN EXTERNAL LINKS SAFELY
     ===================================================== */
 
     const externalLinks =
@@ -1436,7 +1851,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     externalLinks.forEach(
-        (link) => {
+        function (link) {
 
             const currentHost =
                 window.location.hostname;
@@ -1461,6 +1876,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         "_blank"
                     );
 
+
                     link.setAttribute(
                         "rel",
                         "noopener noreferrer"
@@ -1470,7 +1886,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             } catch (error) {
 
-                /* Ignore invalid URLs */
+                /*
+                 Ignore invalid URLs.
+                */
 
             }
 
@@ -1484,13 +1902,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.addEventListener(
         "keydown",
-        (event) => {
+        function (event) {
 
-            /* ESC closes mobile menu */
+            /* ---------------------------------------------
+               ESCAPE
+            --------------------------------------------- */
 
             if (
                 event.key === "Escape"
             ) {
+
+                /* Close mobile menu */
 
                 if (
                     mainNav &&
@@ -1509,10 +1931,12 @@ document.addEventListener("DOMContentLoaded", () => {
                         menuToggle.textContent =
                             "☰";
 
+
                         menuToggle.setAttribute(
                             "aria-expanded",
                             "false"
                         );
+
 
                         menuToggle.setAttribute(
                             "aria-label",
@@ -1528,6 +1952,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 }
 
+
+                /* Close contact toast */
+
+                closeContactToast();
+
             }
 
         }
@@ -1535,7 +1964,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =====================================================
-       REDUCE MOTION SUPPORT
+       REDUCED MOTION SUPPORT
     ===================================================== */
 
     const prefersReducedMotion =
@@ -1544,26 +1973,23 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
 
-    const updateReducedMotion =
-        (event) => {
+    function updateReducedMotion(event) {
 
-            if (
-                event.matches
-            ) {
+        if (event.matches) {
 
-                document.documentElement.classList.add(
-                    "reduce-motion"
-                );
+            document.documentElement.classList.add(
+                "reduce-motion"
+            );
 
-            } else {
+        } else {
 
-                document.documentElement.classList.remove(
-                    "reduce-motion"
-                );
+            document.documentElement.classList.remove(
+                "reduce-motion"
+            );
 
-            }
+        }
 
-        };
+    }
 
 
     updateReducedMotion(
@@ -1581,9 +2007,10 @@ document.addEventListener("DOMContentLoaded", () => {
             updateReducedMotion
         );
 
-    } else {
-
-        /* Older browser support */
+    } else if (
+        typeof prefersReducedMotion.addListener ===
+        "function"
+    ) {
 
         prefersReducedMotion.addListener(
             updateReducedMotion
@@ -1594,12 +2021,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* =====================================================
        PAGE VISIBILITY
-       Re-trigger small effects when returning to tab
     ===================================================== */
 
     document.addEventListener(
         "visibilitychange",
-        () => {
+        function () {
 
             if (
                 document.visibilityState ===
@@ -1623,11 +2049,11 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(
         'a[href="#"]'
     ).forEach(
-        (link) => {
+        function (link) {
 
             link.addEventListener(
                 "click",
-                (event) => {
+                function (event) {
 
                     event.preventDefault();
 
@@ -1643,7 +2069,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ===================================================== */
 
     requestAnimationFrame(
-        () => {
+        function () {
 
             document.body.classList.add(
                 "portfolio-loaded"

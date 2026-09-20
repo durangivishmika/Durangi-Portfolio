@@ -64,7 +64,7 @@ img {
     --text: #d8e1ee;
     --muted: #aebbd0;
 
-    --container: 1250px;
+    --container: 1568px;
 
     --transition: 0.3s ease;
 }
@@ -3352,4 +3352,555 @@ textarea:focus-visible {
         min-height: 44px !important;
         max-height: 44px !important;
     }
+}
+
+/* =========================================================
+   48. FINAL CONTACT FORM OVERRIDE
+   Supports the clean FormSubmit contact form in index.html
+========================================================= */
+
+.contact-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.contact-form .form-row {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.contact-form > input,
+.contact-form > textarea,
+.contact-form .form-row > input,
+.contact-form .form-row > textarea {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    border: 1px solid #41536d;
+    border-radius: 10px;
+    outline: none;
+    background: #132238;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 14px;
+    transition:
+        border-color 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.contact-form > input,
+.contact-form .form-row > input {
+    height: 56px;
+    min-height: 56px;
+    padding: 0 17px;
+}
+
+.contact-form > textarea,
+.contact-form .form-row > textarea {
+    min-height: 160px;
+    height: 160px;
+    padding: 15px 17px;
+    line-height: 1.6;
+    resize: vertical;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: #7889a2;
+    opacity: 1;
+}
+
+.contact-form > input:focus,
+.contact-form > textarea:focus,
+.contact-form .form-row > input:focus,
+.contact-form .form-row > textarea:focus {
+    border-color: var(--red);
+    background: #172941;
+    box-shadow: 0 0 0 3px rgba(239, 43, 50, 0.12);
+}
+
+.contact-form > button,
+.contact-form .send-message-btn {
+    width: 100%;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 0;
+    padding: 14px 20px;
+    border: 1px solid var(--red);
+    border-radius: 10px;
+    background: var(--red);
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1.2;
+    cursor: pointer;
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.contact-form > button:hover,
+.contact-form .send-message-btn:hover {
+    background: #ffffff;
+    color: var(--red);
+    border-color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(239, 43, 50, 0.3);
+}
+
+.contact-form > button:active,
+.contact-form .send-message-btn:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+    .contact-form .form-row {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .contact-form > input,
+    .contact-form > textarea,
+    .contact-form .form-row > input,
+    .contact-form .form-row > textarea {
+        width: 100%;
+    }
+
+    .contact-form > input,
+    .contact-form .form-row > input {
+        height: 54px;
+        min-height: 54px;
+    }
+
+    .contact-form > textarea,
+    .contact-form .form-row > textarea {
+        height: 160px;
+        min-height: 160px;
+    }
+
+    .contact-form > button,
+    .contact-form .send-message-btn {
+        width: 100%;
+        min-height: 54px;
+    }
+    /* =========================================================
+   CONTACT FORM - AJAX
+========================================================= */
+
+.contact-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.contact-form .form-row {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+
+    border: 1px solid #41536d;
+    border-radius: 10px;
+
+    outline: none;
+
+    background: #132238;
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    transition:
+        border-color 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.contact-form input {
+    height: 56px;
+    padding: 0 17px;
+}
+
+.contact-form textarea {
+    min-height: 180px;
+    height: 180px;
+
+    padding: 15px 17px;
+
+    resize: vertical;
+
+    line-height: 1.6;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: #7889a2;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: var(--red);
+
+    background: #172941;
+
+    box-shadow:
+        0 0 0 3px rgba(239, 43, 50, 0.12);
+}
+
+
+/* =========================================================
+   SEND BUTTON
+========================================================= */
+
+.send-message-btn {
+    width: 100%;
+    min-height: 56px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 14px 20px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: var(--red);
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 900;
+
+    cursor: pointer;
+
+    transition:
+        background 0.3s ease,
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.send-message-btn:hover {
+    background: #d91f26;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 12px 30px rgba(239, 43, 50, 0.3);
+}
+
+.send-message-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+}
+
+
+/* =========================================================
+   CONTACT SUCCESS / ERROR TOAST
+   FINAL VERSION
+========================================================= */
+
+#contactToast {
+    position: fixed !important;
+
+    top: 100px !important;
+    right: 30px !important;
+    left: auto !important;
+    bottom: auto !important;
+
+    width: 420px !important;
+    max-width: calc(100vw - 40px) !important;
+
+    min-height: 70px !important;
+
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+
+    gap: 14px !important;
+
+    padding: 16px 18px !important;
+
+    box-sizing: border-box !important;
+
+    background: #1d2b42 !important;
+    color: #ffffff !important;
+
+    border: 1px solid rgba(239, 43, 50, 0.65) !important;
+
+    border-radius: 12px !important;
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.40) !important;
+
+    z-index: 999999 !important;
+
+    opacity: 0 !important;
+    visibility: hidden !important;
+
+    transform: translateX(120%) !important;
+
+    pointer-events: none !important;
+
+    transition:
+        opacity 0.35s ease,
+        visibility 0.35s ease,
+        transform 0.35s ease !important;
+}
+
+
+/* =========================================================
+   SHOW TOAST
+========================================================= */
+
+#contactToast.show {
+    opacity: 1 !important;
+
+    visibility: visible !important;
+
+    transform: translateX(0) !important;
+
+    pointer-events: auto !important;
+}
+
+
+/* =========================================================
+   SUCCESS ICON
+========================================================= */
+
+#contactToast .contact-toast-icon {
+    width: 42px !important;
+    min-width: 42px !important;
+
+    height: 42px !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    padding: 0 !important;
+
+    margin: 0 !important;
+
+    border-radius: 50% !important;
+
+    background: #ef2b32 !important;
+
+    color: #ffffff !important;
+
+    font-size: 22px !important;
+
+    font-weight: 900 !important;
+
+    line-height: 1 !important;
+
+    box-sizing: border-box !important;
+}
+
+
+/* =========================================================
+   TOAST CONTENT
+========================================================= */
+
+#contactToast .contact-toast-content {
+    flex: 1 !important;
+
+    display: flex !important;
+
+    flex-direction: column !important;
+
+    gap: 3px !important;
+
+    margin: 0 !important;
+
+    padding: 0 !important;
+
+    min-width: 0 !important;
+}
+
+
+#contactToast .contact-toast-content strong {
+    display: block !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    color: #ffffff !important;
+
+    font-size: 15px !important;
+
+    font-weight: 800 !important;
+
+    line-height: 1.3 !important;
+}
+
+
+#contactToast .contact-toast-content span {
+    display: block !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    color: #c5d0df !important;
+
+    font-size: 13px !important;
+
+    font-weight: 400 !important;
+
+    line-height: 1.4 !important;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+========================================================= */
+
+#contactToast .contact-toast-close {
+    width: 32px !important;
+    min-width: 32px !important;
+
+    height: 32px !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+
+    justify-content: center !important;
+
+    padding: 0 !important;
+
+    margin: 0 !important;
+
+    border: none !important;
+
+    border-radius: 50% !important;
+
+    background: transparent !important;
+
+    color: #c5d0df !important;
+
+    font-size: 22px !important;
+
+    font-weight: 400 !important;
+
+    line-height: 1 !important;
+
+    cursor: pointer !important;
+
+    box-sizing: border-box !important;
+}
+
+
+#contactToast .contact-toast-close:hover {
+    background: rgba(255, 255, 255, 0.10) !important;
+
+    color: #ffffff !important;
+}
+
+
+/* =========================================================
+   ERROR TOAST
+========================================================= */
+
+#contactToast.contact-toast-error {
+    border-color: rgba(255, 90, 90, 0.80) !important;
+}
+
+
+#contactToast.contact-toast-error
+.contact-toast-icon {
+    background: #c62828 !important;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 850px) {
+
+    #contactToast {
+        top: 85px !important;
+
+        left: 15px !important;
+        right: 15px !important;
+
+        width: auto !important;
+        max-width: none !important;
+
+        min-height: 68px !important;
+
+        padding: 14px 15px !important;
+    }
+
+
+    #contactToast .contact-toast-icon {
+        width: 38px !important;
+        min-width: 38px !important;
+
+        height: 38px !important;
+
+        font-size: 19px !important;
+    }
+
+
+    #contactToast .contact-toast-content strong {
+        font-size: 14px !important;
+    }
+
+
+    #contactToast .contact-toast-content span {
+        font-size: 12px !important;
+    }
+
+
+    #contactToast .contact-toast-close {
+        width: 30px !important;
+        min-width: 30px !important;
+
+        height: 30px !important;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    #contactToast {
+        top: 75px !important;
+
+        left: 10px !important;
+        right: 10px !important;
+
+        padding: 13px !important;
+    }
+
 }
