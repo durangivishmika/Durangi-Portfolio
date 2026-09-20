@@ -8,26 +8,37 @@
 
     <title>Diploma in English | Durangi Vishmika</title>
 
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../style.css?v=20260921-hero3">
 
 </head>
 
 <body>
-<header class="header">
-    <nav class="navbar">
 
-       <a href="../index.html" class="portfolio-logo">
-    <img src="../images/dv-logo.png" alt="DV Logo">
-</a>
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="header">
+
+    <div class="container nav-container">
+
+        <a href="../index.html" class="portfolio-logo">
+            <img src="../images/dv-logo.png" alt="DV Logo">
+        </a>
+
         <button
+            type="button"
             class="menu-toggle"
             id="menuToggle"
-            aria-label="Open navigation menu"
+            aria-label="Open navigation"
+            aria-expanded="false"
+            aria-controls="mainNav"
         >
             ☰
         </button>
 
-        <div class="nav" id="navLinks">
+        <nav class="nav" id="mainNav">
 
             <a href="../index.html#home">Home</a>
             <a href="../index.html#about">About</a>
@@ -37,17 +48,25 @@
             <a href="../index.html#education">Education</a>
             <a href="../index.html#contact">Contact</a>
 
-        </div>
+        </nav>
 
-    </nav>
+    </div>
+
 </header>
 
+
+<!-- =========================================================
+     MAIN CONTENT
+========================================================= -->
 
 <main class="education-detail-page">
 
     <div class="education-detail-container">
 
-        <a href="../index.html#education" class="back-project">
+        <a
+            href="../index.html#education"
+            class="back-project"
+        >
             ← Back to Education
         </a>
 
@@ -103,12 +122,10 @@
 
 </main>
 
-</body>
 
-
-<!-- =========================================
+<!-- =========================================================
      FOOTER
-========================================= -->
+========================================================= -->
 
 <footer class="footer">
 
@@ -123,11 +140,10 @@
                 </strong>
 
                 <p>
-                   Quality Assurance 
+                    Quality Assurance
                 </p>
 
             </div>
-
 
             <p>
                 © 2026 Durangi Vishmika.
@@ -139,5 +155,15 @@
     </div>
 
 </footer>
+
+
+<!-- =========================================================
+     MAIN JAVASCRIPT
+========================================================= -->
+
+<script src="../script.js?v=20260921-final"></script>
+
+
+</body>
 
 </html>

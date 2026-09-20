@@ -8,20 +8,37 @@
 
     <title>Ada Derana Sinhala | QA Project</title>
 
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../style.css?v=20260921-hero3">
 
 </head>
 
 <body>
 
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
 <header class="header">
 
     <div class="container nav-container">
-<a href="../index.html" class="portfolio-logo">
-    <img src="../images/dv-logo.png" alt="DV Logo">
-</a>
 
-        <nav class="nav">
+        <a href="../index.html" class="portfolio-logo">
+            <img src="../images/dv-logo.png" alt="DV Logo">
+        </a>
+
+        <button
+            type="button"
+            class="menu-toggle"
+            id="menuToggle"
+            aria-label="Open navigation"
+            aria-expanded="false"
+            aria-controls="mainNav"
+        >
+            ☰
+        </button>
+
+        <nav class="nav" id="mainNav">
 
             <a href="../index.html#home">Home</a>
             <a href="../index.html#about">About</a>
@@ -38,13 +55,21 @@
 </header>
 
 
+<!-- =========================================================
+     MAIN CONTENT
+========================================================= -->
+
 <main class="project-detail-page">
 
     <div class="project-detail-container">
 
-        <a href="../index.html#experience" class="back-project">
+        <a
+            href="../index.html#experience"
+            class="back-project"
+        >
             ← Back to Experience
         </a>
+
 
         <div class="project-detail-header">
 
@@ -57,14 +82,19 @@
             </h1>
 
             <p>
-                QA testing of the Ada Derana Sinhala website, including
-                functional validation and defect reporting.
+                QA testing of the Ada Derana Sinhala website,
+                including functional validation and defect reporting.
             </p>
 
         </div>
 
 
         <div class="detail-grid">
+
+
+            <!-- =================================================
+                 QA WORK
+            ================================================== -->
 
             <div class="detail-card">
 
@@ -73,16 +103,39 @@
                 </h2>
 
                 <ul>
-                    <li>Manual website testing</li>
-                    <li>Functional validation</li>
-                    <li>User flow testing</li>
-                    <li>Navigation testing</li>
-                    <li>Test case execution</li>
-                    <li>Defect identification</li>
+
+                    <li>
+                        Manual website testing
+                    </li>
+
+                    <li>
+                        Functional validation
+                    </li>
+
+                    <li>
+                        User flow testing
+                    </li>
+
+                    <li>
+                        Navigation testing
+                    </li>
+
+                    <li>
+                        Test case execution
+                    </li>
+
+                    <li>
+                        Defect identification
+                    </li>
+
                 </ul>
 
             </div>
 
+
+            <!-- =================================================
+                 DEFECT MANAGEMENT
+            ================================================== -->
 
             <div class="detail-card">
 
@@ -91,19 +144,28 @@
                 </h2>
 
                 <p>
-                    Identified application issues and documented defects
-                    with clear information for development teams.
+                    Identified application issues and documented
+                    defects with clear information for development teams.
                 </p>
 
                 <div class="detail-tags">
 
-                    <span>Jira</span>
-                    <span>Test Cases</span>
-                    <span>Manual QA</span>
+                    <span>
+                        Jira
+                    </span>
+
+                    <span>
+                        Test Cases
+                    </span>
+
+                    <span>
+                        Manual QA
+                    </span>
 
                 </div>
 
             </div>
+
 
         </div>
 
@@ -112,10 +174,9 @@
 </main>
 
 
-
-<!-- =========================================
+<!-- =========================================================
      FOOTER
-========================================= -->
+========================================================= -->
 
 <footer class="footer">
 
@@ -130,11 +191,10 @@
                 </strong>
 
                 <p>
-                    Quality Assurance 
+                    Quality Assurance
                 </p>
 
             </div>
-
 
             <p>
                 © 2026 Durangi Vishmika.
@@ -146,6 +206,13 @@
     </div>
 
 </footer>
+
+
+<!-- =========================================================
+     MAIN JAVASCRIPT
+========================================================= -->
+
+<script src="../script.js?v=20260921-final"></script>
 
 
 </body>

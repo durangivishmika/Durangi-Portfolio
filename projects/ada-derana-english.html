@@ -2,25 +2,43 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Ada Derana English | QA Project</title>
 
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../style.css?v=20260921-hero3">
+
 </head>
 
 <body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
 
 <header class="header">
 
     <div class="container nav-container">
 
-       <a href="../index.html" class="portfolio-logo">
-    <img src="../images/dv-logo.png" alt="DV Logo">
-</a>
+        <a href="../index.html" class="portfolio-logo">
+            <img src="../images/dv-logo.png" alt="DV Logo">
+        </a>
 
-        <nav class="nav">
+        <button
+            type="button"
+            class="menu-toggle"
+            id="menuToggle"
+            aria-label="Open navigation"
+            aria-expanded="false"
+            aria-controls="mainNav"
+        >
+            ☰
+        </button>
+
+        <nav class="nav" id="mainNav">
 
             <a href="../index.html#home">Home</a>
             <a href="../index.html#about">About</a>
@@ -37,13 +55,21 @@
 </header>
 
 
+<!-- =========================================================
+     MAIN CONTENT
+========================================================= -->
+
 <main class="project-detail-page">
 
     <div class="project-detail-container">
 
-        <a href="../index.html#experience" class="back-project">
+        <a
+            href="../index.html#experience"
+            class="back-project"
+        >
             ← Back to Experience
         </a>
+
 
         <div class="project-detail-header">
 
@@ -56,15 +82,20 @@
             </h1>
 
             <p>
-                My primary QA project at Derana Macroentertainment (Macro Labs),
-                involving manual testing, test case creation, defect reporting
-                and Cypress automation testing.
+                My primary QA project at Derana Macroentertainment
+                (Macro Labs), involving manual testing, test case
+                creation, defect reporting and Cypress automation testing.
             </p>
 
         </div>
 
 
         <div class="detail-grid">
+
+
+            <!-- =================================================
+                 PROJECT OVERVIEW
+            ================================================== -->
 
             <div class="detail-card">
 
@@ -73,17 +104,22 @@
                 </h2>
 
                 <p>
-                    Ada Derana English is the primary project where I perform
-                    Quality Assurance activities as part of my internship.
+                    Ada Derana English is the primary project where
+                    I perform Quality Assurance activities as part
+                    of my current role.
                 </p>
 
                 <p>
-                    I work with the QA and development teams to test website
-                    functionality and identify application issues.
+                    I work with the QA and development teams to test
+                    website functionality and identify application issues.
                 </p>
 
             </div>
 
+
+            <!-- =================================================
+                 QA ACTIVITIES
+            ================================================== -->
 
             <div class="detail-card">
 
@@ -92,18 +128,47 @@
                 </h2>
 
                 <ul>
-                    <li>Manual web application testing</li>
-                    <li>Functional testing</li>
-                    <li>Test case creation</li>
-                    <li>Test execution</li>
-                    <li>Defect identification</li>
-                    <li>Jira defect reporting</li>
-                    <li>Regression testing</li>
-                    <li>User flow testing</li>
+
+                    <li>
+                        Manual web application testing
+                    </li>
+
+                    <li>
+                        Functional testing
+                    </li>
+
+                    <li>
+                        Test case creation
+                    </li>
+
+                    <li>
+                        Test execution
+                    </li>
+
+                    <li>
+                        Defect identification
+                    </li>
+
+                    <li>
+                        Jira defect reporting
+                    </li>
+
+                    <li>
+                        Regression testing
+                    </li>
+
+                    <li>
+                        User flow testing
+                    </li>
+
                 </ul>
 
             </div>
 
+
+            <!-- =================================================
+                 AUTOMATION
+            ================================================== -->
 
             <div class="detail-card">
 
@@ -112,17 +177,21 @@
                 </h2>
 
                 <p>
-                    I develop and maintain Cypress automation tests for
-                    selected web application scenarios.
+                    I develop and maintain Cypress automation tests
+                    for selected web application scenarios.
                 </p>
 
                 <p>
-                    The automation work includes testing important website
-                    flows and supporting repeatable regression testing.
+                    The automation work includes testing important
+                    website flows and supporting repeatable regression testing.
                 </p>
 
             </div>
 
+
+            <!-- =================================================
+                 TOOLS
+            ================================================== -->
 
             <div class="detail-card">
 
@@ -144,6 +213,10 @@
             </div>
 
 
+            <!-- =================================================
+                 API TESTING
+            ================================================== -->
+
             <div class="detail-card full">
 
                 <h2>
@@ -158,6 +231,7 @@
 
             </div>
 
+
         </div>
 
     </div>
@@ -165,10 +239,9 @@
 </main>
 
 
-
-<!-- =========================================
+<!-- =========================================================
      FOOTER
-========================================= -->
+========================================================= -->
 
 <footer class="footer">
 
@@ -183,11 +256,10 @@
                 </strong>
 
                 <p>
-                   Quality Assurance 
+                    Quality Assurance
                 </p>
 
             </div>
-
 
             <p>
                 © 2026 Durangi Vishmika.
@@ -199,6 +271,13 @@
     </div>
 
 </footer>
+
+
+<!-- =========================================================
+     MAIN JAVASCRIPT
+========================================================= -->
+
+<script src="../script.js?v=20260921-final"></script>
 
 
 </body>

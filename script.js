@@ -1861,3 +1861,130 @@ document.addEventListener("DOMContentLoaded", function () {
 console.log(
     "Durangi Vishmika | QA Portfolio Loaded Successfully"
 );
+/* =========================================================
+   PROJECT / SUB-PAGE ACTIVE NAVIGATION
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const navLinks = document.querySelectorAll(
+        ".nav a, .nav-links a"
+    );
+
+    if (!navLinks.length) {
+        return;
+    }
+
+    const currentPath =
+        window.location.pathname.toLowerCase();
+
+    const isProjectPage =
+        currentPath.includes("/projects/");
+
+    const isAcademicPage =
+        currentPath.includes("/academic/");
+
+    const isEducationPage =
+        currentPath.includes("/education/");
+
+
+    /* Remove existing active state */
+
+    navLinks.forEach(function (link) {
+
+        link.classList.remove("active");
+        link.removeAttribute("aria-current");
+
+    });
+
+
+    /* =====================================================
+       PROJECT PAGES
+    ===================================================== */
+
+    if (isProjectPage) {
+
+        navLinks.forEach(function (link) {
+
+            const href =
+                link.getAttribute("href");
+
+            if (
+                href &&
+                href.includes("#experience")
+            ) {
+
+                link.classList.add("active");
+
+                link.setAttribute(
+                    "aria-current",
+                    "page"
+                );
+
+            }
+
+        });
+
+    }
+
+
+    /* =====================================================
+       ACADEMIC PROJECT PAGES
+    ===================================================== */
+
+    else if (isAcademicPage) {
+
+        navLinks.forEach(function (link) {
+
+            const href =
+                link.getAttribute("href");
+
+            if (
+                href &&
+                href.includes("#projects")
+            ) {
+
+                link.classList.add("active");
+
+                link.setAttribute(
+                    "aria-current",
+                    "page"
+                );
+
+            }
+
+        });
+
+    }
+
+
+    /* =====================================================
+       EDUCATION PAGES
+    ===================================================== */
+
+    else if (isEducationPage) {
+
+        navLinks.forEach(function (link) {
+
+            const href =
+                link.getAttribute("href");
+
+            if (
+                href &&
+                href.includes("#education")
+            ) {
+
+                link.classList.add("active");
+
+                link.setAttribute(
+                    "aria-current",
+                    "page"
+                );
+
+            }
+
+        });
+
+    }
+
+});
